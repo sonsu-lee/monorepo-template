@@ -9,7 +9,7 @@ This repository is a pnpm workspace monorepo orchestrated by Turborepo.
 
 ## Requirements
 
-- Node.js `>=20.9.0`
+- Node.js `20.19.x` or `>=22.12.0`
 - pnpm `10.33.2`
 
 ## Commands
@@ -20,12 +20,16 @@ Run these from the repository root:
 pnpm install
 pnpm dev
 pnpm build
+pnpm format
+pnpm format:check
 pnpm typecheck
 pnpm start
 ```
 
 Root commands run through Turbo. Build and type-check results use the local
-task cache; `dev` and `start` are not cached. No remote cache is configured.
+task cache; `format:check` caches its logs. The mutating `format` task and the
+persistent `dev` and `start` tasks are not cached. No remote cache is
+configured.
 
 For direct application commands, use the package escape hatch:
 
