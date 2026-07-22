@@ -10,7 +10,7 @@ This repository is a pnpm workspace monorepo orchestrated by Turborepo.
 ## Requirements
 
 - Node.js `20.19.x` or `>=22.12.0`
-- pnpm `10.33.2`
+- pnpm `11.15.1`
 
 ## Commands
 

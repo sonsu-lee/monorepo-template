@@ -2,6 +2,12 @@ packages:
   - "apps/*"
   - "packages/*"
 
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+
+minimumReleaseAgeExclude:
+  - "@next/*"
+  - "@oxfmt/*"
+  - next
+  - oxfmt
