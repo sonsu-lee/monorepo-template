@@ -1,6 +1,6 @@
 # monorepo-template
 
-This repository is a pnpm workspace monorepo.
+This repository is a pnpm workspace monorepo orchestrated by Turborepo.
 
 ## Structure
 
@@ -22,6 +22,15 @@ pnpm dev
 pnpm build
 pnpm typecheck
 pnpm start
+```
+
+Root commands run through Turbo. Build and type-check results use the local
+task cache; `dev` and `start` are not cached. No remote cache is configured.
+
+For direct application commands, use the package escape hatch:
+
+```bash
+pnpm --filter @repo/web dev
 ```
 
 The main page is at `apps/web/src/app/page.tsx`.

@@ -17,6 +17,9 @@ coverage/
 .next/
 out/
 
+# turborepo
+.turbo/
+
 # production
 build/
 

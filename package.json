@@ -7,9 +7,12 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "dev": "pnpm --filter @repo/web dev",
-    "build": "pnpm --filter @repo/web build",
-    "start": "pnpm --filter @repo/web start",
-    "typecheck": "pnpm --filter @repo/web typecheck"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start --filter=@repo/web",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "turbo": "2.10.5"
   }
 }
