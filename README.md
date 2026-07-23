@@ -7,6 +7,11 @@ This repository is a pnpm workspace monorepo orchestrated by Turborepo.
 - `apps/web` is the Next.js application.
 - `packages/*` is reserved for shared packages.
 
+## Frontend conventions
+
+- [State and data flow](docs/frontend/state-management.md) explains the
+  XState and TanStack Query ownership boundaries.
+
 ## Requirements
 
 - Node.js `20.19.x` or `>=22.12.0`
