@@ -1,10 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
   experimental: {
     useTypeScriptCli: true,
   },
+  reactCompiler: true,
 };
 
 export default nextConfig;
