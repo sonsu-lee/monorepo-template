@@ -25,7 +25,7 @@ importers:
         version: 6.1.0(@types/react@19.2.17)(react@19.2.8)(xstate@5.32.5)
       next:
         specifier: 16.3.0-canary.93
-        version: 16.3.0-canary.93(@babel/core@7.29.7)(@types/node@26.1.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 16.3.0-canary.93(@babel/core@7.29.7)(@types/node@24.13.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -43,8 +43,8 @@ importers:
         specifier: ^0.19.0
         version: 0.19.0
       '@types/node':
-        specifier: ^26.1.1
-        version: 26.1.1
+        specifier: ^24.13.3
+        version: 24.13.3
       '@types/react':
         specifier: ^19.2.17
         version: 19.2.17
@@ -717,8 +717,8 @@ packages:
     cpu: [arm64]
     os: [win32]
 
-  '@types/node@26.1.1':
-    resolution: {integrity: sha512-nxAkRSVkN1Y0JC1W8ky/fTfkGsMmcrRsbx+3XoZE+rMOX71kLYTV7fLXpqud1GpbpP5TuffXFqfX7fH2GgZREw==}
+  '@types/node@24.13.3':
+    resolution: {integrity: sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -1142,8 +1142,8 @@ packages:
     engines: {node: '>=16.20.0'}
     hasBin: true
 
-  undici-types@8.3.0:
-    resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
   update-browserslist-db@1.2.3:
     resolution: {integrity: sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==}
@@ -1637,9 +1637,9 @@ snapshots:
   '@turbo/windows-arm64@2.10.5':
     optional: true
 
-  '@types/node@26.1.1':
+  '@types/node@24.13.3':
     dependencies:
-      undici-types: 8.3.0
+      undici-types: 7.18.2
 
   '@types/react-dom@19.2.3(@types/react@19.2.17)':
     dependencies:
@@ -1832,7 +1832,7 @@ snapshots:
 
   nanoid@3.3.16: {}
 
-  next@16.3.0-canary.93(@babel/core@7.29.7)(@types/node@26.1.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  next@16.3.0-canary.93(@babel/core@7.29.7)(@types/node@24.13.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 16.3.0-canary.93
       '@swc/helpers': 0.5.15
@@ -1852,7 +1852,7 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 16.3.0-canary.93
       '@next/swc-win32-x64-msvc': 16.3.0-canary.93
       babel-plugin-react-compiler: 1.0.0
-      sharp: 0.35.3(@types/node@26.1.1)
+      sharp: 0.35.3(@types/node@24.13.3)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
@@ -1950,7 +1950,7 @@ snapshots:
   semver@7.8.5:
     optional: true
 
-  sharp@0.35.3(@types/node@26.1.1):
+  sharp@0.35.3(@types/node@24.13.3):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -1981,7 +1981,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.3
       '@img/sharp-win32-ia32': 0.35.3
       '@img/sharp-win32-x64': 0.35.3
-      '@types/node': 26.1.1
+      '@types/node': 24.13.3
     optional: true
 
   source-map-js@1.2.1: {}
@@ -2035,7 +2035,7 @@ snapshots:
       '@typescript/typescript-win32-arm64': 7.0.2
       '@typescript/typescript-win32-x64': 7.0.2
 
-  undici-types@8.3.0: {}
+  undici-types@7.18.2: {}
 
   update-browserslist-db@1.2.3(browserslist@4.28.7):
     dependencies:

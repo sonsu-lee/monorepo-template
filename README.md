@@ -14,7 +14,7 @@ This repository is a pnpm workspace monorepo orchestrated by Turborepo.
 
 ## Requirements
 
-- Node.js `20.19.x` or `>=22.12.0`
+- Node.js 24 LTS (`24.18.0` or newer within the 24.x line)
 - pnpm `11.15.1`
 
 ## Commands
