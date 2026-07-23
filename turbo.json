@@ -13,6 +13,12 @@
       "cache": false
     },
     "format:check": {},
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:fix": {
+      "cache": false
+    },
     "start": {
       "cache": false,
       "persistent": true

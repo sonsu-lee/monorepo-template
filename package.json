@@ -11,6 +11,8 @@
     "build": "turbo run build",
     "format": "turbo run format",
     "format:check": "turbo run format:check",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
     "start": "turbo run start --filter=@repo/web",
     "typecheck": "turbo run typecheck"
   },
