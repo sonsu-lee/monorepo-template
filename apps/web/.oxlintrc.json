@@ -12,7 +12,8 @@
     "react",
     "react-perf",
     "typescript",
-    "unicorn"
+    "unicorn",
+    "vitest"
   ],
   "env": {
     "browser": true,
@@ -55,6 +56,7 @@
     "react/jsx-no-constructed-context-values": "error",
     "react/no-object-type-as-default-prop": "error",
     "react/react-compiler": "error",
+    "vitest/consistent-test-it": ["error", { "fn": "test" }],
 
     "eslint/id-length": "off",
     "eslint/max-classes-per-file": "off",
@@ -93,6 +95,10 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
+    "vitest/no-importing-vitest-globals": "off",
+    "vitest/prefer-expect-assertions": "off",
+    "vitest/prefer-to-be-falsy": "off",
+    "vitest/prefer-to-be-truthy": "off",
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",
     "import/no-nodejs-modules": "off",

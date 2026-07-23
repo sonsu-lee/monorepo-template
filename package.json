@@ -14,6 +14,9 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "start": "turbo run start --filter=@repo/web",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:watch": "turbo run test:watch",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {

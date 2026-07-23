@@ -246,6 +246,7 @@ Run the full repository checks from the workspace root:
 ```bash
 pnpm format:check
 pnpm lint
+pnpm test
 pnpm typecheck
 pnpm build
 ```

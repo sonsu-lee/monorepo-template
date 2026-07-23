@@ -29,15 +29,25 @@ pnpm format
 pnpm format:check
 pnpm lint
 pnpm lint:fix
+pnpm test
+pnpm test:coverage
+pnpm test:watch
 pnpm typecheck
 pnpm start
 ```
 
 Root commands run through Turbo. `lint` is strict, type-aware, and type-checks;
-warnings fail the command. Build and type-check results use the local task
-cache; `format:check` and `lint` may cache their logs. The mutating `format`
-and `lint:fix` tasks and the persistent `dev` and `start` tasks are not cached.
-No remote cache is configured.
+warnings fail the command. Build, type-check, test, and coverage results use the
+local task cache; `format:check` and `lint` may cache their logs. The mutating
+`format` and `lint:fix` tasks and the persistent `dev`, `start`, and `test:watch`
+tasks are not cached. No remote cache is configured.
+
+Unit and integration tests use Vitest's Node environment. Keep unit tests next
+to their source as `*.test.ts` or `*.test.tsx`, and put integration tests under
+`apps/web/tests/integration` as `*.integration.test.ts` or
+`*.integration.test.tsx`. `test` runs once, `test:watch` stays open for local
+development, and `test:coverage` writes V8 coverage reports under each
+package's ignored `coverage` directory.
 
 For direct application commands, use the package escape hatch:
 
