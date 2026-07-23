@@ -16,6 +16,8 @@
     "start": "turbo run start --filter=@repo/web",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
+    "test:e2e": "turbo run test:e2e",
+    "test:e2e:ui": "turbo run test:e2e:ui --filter=@repo/web",
     "test:watch": "turbo run test:watch",
     "typecheck": "turbo run typecheck"
   },

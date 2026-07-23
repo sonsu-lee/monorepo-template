@@ -39,6 +39,15 @@
     "next-env.d.ts",
     "*.tsbuildinfo"
   ],
+  "overrides": [
+    {
+      "files": ["e2e/**/*.spec.{ts,tsx}"],
+      "rules": {
+        "vitest/consistent-test-filename": "off",
+        "vitest/prefer-importing-vitest-globals": "off"
+      }
+    }
+  ],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
