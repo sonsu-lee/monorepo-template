@@ -3,6 +3,7 @@ packages:
   - "packages/*"
 
 allowBuilds:
+  esbuild: true
   sharp: false
   unrs-resolver: false
 
@@ -17,3 +18,4 @@ minimumReleaseAgeExclude:
   - oxlint-tsgolint
   - react@19.2.8
   - react-dom@19.2.8
+  - '@hono/node-server@2.0.12'
