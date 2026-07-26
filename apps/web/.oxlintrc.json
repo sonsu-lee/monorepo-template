@@ -1,20 +1,7 @@
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "eslint",
-    "import",
-    "jsdoc",
-    "jsx-a11y",
-    "nextjs",
-    "node",
-    "oxc",
-    "promise",
-    "react",
-    "react-perf",
-    "typescript",
-    "unicorn",
-    "vitest"
-  ],
+  "$schema": "../../node_modules/oxlint/configuration_schema.json",
+  "extends": ["../../.oxlintrc.json"],
+  "plugins": ["jsdoc", "jsx-a11y", "nextjs", "react", "react-perf", "vitest"],
   "env": {
     "browser": true,
     "node": true
@@ -48,12 +35,6 @@
       }
     }
   ],
-  "options": {
-    "denyWarnings": true,
-    "reportUnusedDisableDirectives": "error",
-    "typeAware": true,
-    "typeCheck": true
-  },
   "rules": {
     "eslint/no-param-reassign": ["error", { "props": true }],
     "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
@@ -61,7 +42,6 @@
       "error",
       { "allow": ["**/*.css", "server-only", "client-only"] }
     ],
-    "oxc/no-accumulating-spread": "error",
     "react/jsx-no-constructed-context-values": "error",
     "react/no-object-type-as-default-prop": "error",
     "react/react-compiler": "error",
@@ -121,21 +101,8 @@
     "react/no-array-index-key": "error",
     "typescript/prefer-readonly-parameter-types": "off",
     "eslint/no-proto": "error",
-    "import/no-cycle": "error",
-    "node/no-path-concat": "error",
     "react/button-has-type": "error",
     "react/no-unknown-property": ["error", { "requireDataLowercase": true }],
-    "typescript/no-empty-object-type": "error",
-    "typescript/no-explicit-any": "error",
-    "typescript/no-import-type-side-effects": "error",
-    "typescript/no-invalid-void-type": "error",
-    "typescript/no-non-null-asserted-nullish-coalescing": "error",
-    "typescript/no-non-null-assertion": "error",
-    "typescript/no-require-imports": "error",
-    "typescript/use-unknown-in-catch-callback-variable": "error",
-    "unicorn/no-abusive-eslint-disable": "error",
-    "unicorn/max-nested-calls": "off",
-    "unicorn/no-useless-error-capture-stack-trace": "error",
-    "unicorn/no-array-sort": ["error", { "allowAfterSpread": true }]
+    "unicorn/max-nested-calls": "off"
   }
 }
