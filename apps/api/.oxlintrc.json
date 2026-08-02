@@ -6,12 +6,69 @@
   },
   "categories": {
     "correctness": "error",
+    "pedantic": "error",
     "perf": "error",
+    "style": "error",
     "suspicious": "error"
   },
   "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
   "rules": {
+    "eslint/max-lines-per-function": [
+      "error",
+      {
+        "IIFEs": true,
+        "max": 100,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ],
+    "eslint/max-statements": ["error", { "ignoreTopLevelFunctions": false, "max": 20 }],
+    "eslint/no-magic-numbers": [
+      "error",
+      {
+        "detectObjects": false,
+        "enforceConst": false,
+        "ignore": [-1, 0, 1],
+        "ignoreArrayIndexes": true,
+        "ignoreClassFieldInitialValues": false,
+        "ignoreDefaultValues": true,
+        "ignoreEnums": true,
+        "ignoreNumericLiteralTypes": true,
+        "ignoreReadonlyClassProperties": true,
+        "ignoreTypeIndexes": true
+      }
+    ],
+    "eslint/no-param-reassign": ["error", { "props": true }],
+    "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "import/no-unassigned-import": [
+      "error",
+      { "allow": ["**/instrumentation.{js,ts}", "dotenv/config"] }
+    ],
+    "node/callback-return": ["error", ["callback", "cb"]],
     "typescript/consistent-type-definitions": ["error", "interface"],
+    "typescript/prefer-readonly-parameter-types": [
+      "error",
+      {
+        "allow": [
+          {
+            "from": "lib",
+            "name": ["AbortSignal", "Date", "Error", "Request", "Response"]
+          },
+          {
+            "from": "package",
+            "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
+            "package": "@types/node"
+          },
+          {
+            "from": "package",
+            "name": ["Context", "HTTPResponseError", "Next"],
+            "package": "hono"
+          }
+        ],
+        "ignoreInferredTypes": false,
+        "treatMethodsAsReadonly": true
+      }
+    ],
     "typescript/strict-boolean-expressions": [
       "error",
       {
@@ -33,7 +90,14 @@
         "ignoreVoid": false
       }
     ],
-    "typescript/no-misused-promises": "error",
+    "typescript/no-misused-promises": [
+      "error",
+      {
+        "checksConditionals": true,
+        "checksSpreads": true,
+        "checksVoidReturn": false
+      }
+    ],
     "typescript/no-unnecessary-condition": [
       "error",
       {
@@ -53,8 +117,34 @@
     "typescript/no-unsafe-call": "error",
     "typescript/no-unsafe-member-access": "error",
     "typescript/no-unsafe-return": "error",
+
+    "eslint/init-declarations": "off",
     "eslint/no-await-in-loop": "off",
+    "eslint/no-duplicate-imports": "off",
     "eslint/no-implied-eval": "off",
+    "eslint/no-new-wrappers": "off",
+    "eslint/no-ternary": "off",
+    "eslint/no-throw-literal": "off",
+    "eslint/prefer-promise-reject-errors": "off",
+    "eslint/require-await": "off",
+    "import/exports-last": "off",
+    "import/group-exports": "off",
+    "import/no-named-export": "off",
+    "import/no-nodejs-modules": "off",
+    "import/prefer-default-export": "off",
+    "promise/avoid-new": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    "promise/prefer-await-to-then": "off",
+    "typescript/no-empty-interface": "off",
+    "typescript/prefer-find": "off",
+    "unicorn/explicit-length-check": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/no-nested-ternary": "off",
+    "unicorn/no-null": "off",
+    "unicorn/prefer-event-target": "off",
+    "unicorn/prefer-includes": "off",
+    "unicorn/prefer-number-coercion": "off",
+    "unicorn/prefer-top-level-await": "off",
     "oxc/no-map-spread": "off",
     "unicorn/prefer-node-protocol": "error"
   }
