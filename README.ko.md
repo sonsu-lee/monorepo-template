@@ -62,7 +62,6 @@ pnpm --filter api dev
 | `pnpm storage:down`   | 저장된 데이터를 보존하고 Garage 중지     |
 | `pnpm storage:logs`   | Garage 로그 추적                         |
 | `pnpm storage:status` | Garage 노드와 layout 상태 확인           |
-| `pnpm storage:check`  | 로컬 S3 CRUD 스모크 테스트 실행          |
 | `pnpm storage:reset`  | 모든 로컬 오브젝트 스토리지 데이터 삭제  |
 
 브라우저 테스트를 실행하기 전에 Chromium을 한 번 설치합니다.
@@ -77,15 +76,12 @@ pnpm --filter @repo/web exec playwright install chromium
 오브젝트 스토리지를 제공합니다. Docker가 실행 중이어야 하며 `pnpm dev`는
 Garage를 자동으로 시작하지 않습니다.
 
-Garage를 시작하고 S3 동작을 검증합니다.
+Garage를 시작하고 노드 상태를 확인합니다.
 
 ```bash
 pnpm storage:up
-pnpm storage:check
+pnpm storage:status
 ```
-
-검사는 필요한 경우 Garage를 먼저 시작하고 put, head, list, get, delete
-동작을 확인합니다. 검사가 끝난 뒤에도 Garage는 실행 상태를 유지합니다.
 
 로컬 접속 기본값은 `.env.example`에 문서화되어 있습니다.
 

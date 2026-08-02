@@ -18,7 +18,6 @@
     "storage:down": "docker compose down",
     "storage:logs": "docker compose logs --follow garage",
     "storage:status": "docker compose exec -T garage /garage status",
-    "storage:check": "node infra/garage/check.mjs",
     "storage:reset": "docker compose down --volumes --remove-orphans",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",

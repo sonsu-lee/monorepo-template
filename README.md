@@ -62,7 +62,6 @@ pnpm --filter api dev
 | `pnpm storage:down`   | Stop Garage and preserve stored data |
 | `pnpm storage:logs`   | Follow Garage logs                   |
 | `pnpm storage:status` | Show Garage node and layout status   |
-| `pnpm storage:check`  | Run the local S3 CRUD smoke test     |
 | `pnpm storage:reset`  | Delete all local object storage data |
 
 Install Chromium once before running the browser tests:
@@ -77,15 +76,12 @@ pnpm --filter @repo/web exec playwright install chromium
 for local development. Docker must be running, and `pnpm dev` does not start
 Garage automatically.
 
-Start Garage and verify its S3 operations:
+Start Garage and inspect its node status:
 
 ```bash
 pnpm storage:up
-pnpm storage:check
+pnpm storage:status
 ```
-
-The check starts Garage if necessary and verifies put, head, list, get, and
-delete behavior. Garage remains running afterward.
 
 The local connection defaults are documented in `.env.example`:
 
