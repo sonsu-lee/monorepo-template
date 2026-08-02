@@ -17,8 +17,8 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 
 ## 요구사항
 
-- Node.js 24 LTS (`24.18.0` 이상인 24.x 버전)
-- pnpm `11.15.1`
+- Node.js 24 LTS (`24.18.1` 이상인 24.x 버전)
+- pnpm `11.18.0`
 
 ## 시작하기
 
