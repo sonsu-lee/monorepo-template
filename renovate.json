@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "customManagers:dockerfileVersions",
+    ":semanticCommits",
+    ":timezone(Asia/Tokyo)"
+  ],
+  "packageRules": [
+    {
+      "description": "Keep Node.js runtime declarations synchronized",
+      "matchDatasources": ["node-version"],
+      "matchPackageNames": ["node"],
+      "groupName": "Node.js LTS",
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Move Node.js types with the LTS line",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@types/node"],
+      "groupName": "Node.js LTS"
+    },
+    {
+      "description": "Track Next.js canary releases after the cooldown",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["next"],
+      "ignoreUnstable": false,
+      "respectLatest": false
+    },
+    {
+      "description": "Group StyleX packages",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@stylexjs/**"],
+      "groupName": "StyleX"
+    }
+  ]
+}
