@@ -10,7 +10,7 @@ services:
       - 127.0.0.1:3900:3900
       - 127.0.0.1:3903:3903
     volumes:
-      - ./infra/garage/garage.toml:/etc/garage.toml:ro
+      - ./garage.toml:/etc/garage.toml:ro
       - garage-meta:/var/lib/garage/meta
       - garage-data:/var/lib/garage/data
     healthcheck:
