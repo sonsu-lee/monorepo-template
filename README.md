@@ -17,8 +17,8 @@ API, managed with pnpm workspaces and Turborepo.
 
 ## Requirements
 
-- Node.js 24 LTS (`24.18.0` or newer within the 24.x line)
-- pnpm `11.15.1`
+- Node.js 24 LTS (`24.18.1` or newer within the 24.x line)
+- pnpm `11.18.0`
 - Docker Desktop or Docker Engine with Docker Compose v2 (required only for
   local object storage)
 

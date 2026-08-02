@@ -17,8 +17,8 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 
 ## 요구사항
 
-- Node.js 24 LTS (`24.18.0` 이상인 24.x 버전)
-- pnpm `11.15.1`
+- Node.js 24 LTS (`24.18.1` 이상인 24.x 버전)
+- pnpm `11.18.0`
 - Docker Desktop 또는 Docker Compose v2를 지원하는 Docker Engine
   (로컬 오브젝트 스토리지를 사용할 때만 필요)
 
