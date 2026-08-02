@@ -10,7 +10,7 @@ const config = {
         },
         plugins: babelConfig.plugins,
       },
-      include: ['src/**/*.{js,jsx,ts,tsx}'],
+      include: ['src/**/*.{js,ts,tsx}'],
       useCSSLayers: true,
     },
     autoprefixer: {},

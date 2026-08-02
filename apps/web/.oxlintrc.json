@@ -35,11 +35,29 @@
       }
     },
     {
+      "files": ["**/*.{js,mjs,mts,ts,tsx}"],
+      "rules": {
+        "eslint/no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "message": "Vitest files must use a configured .test.ts or .test.tsx filename."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "files": ["src/**/*.test.{ts,tsx}", "tests/integration/**/*.integration.test.{ts,tsx}"],
       "plugins": ["vitest"],
       "rules": {
+        "eslint/no-restricted-imports": "off",
         "vitest/consistent-test-it": ["error", { "fn": "test" }],
         "vitest/no-importing-vitest-globals": "off",
+        "vitest/no-hooks": "off",
         "vitest/prefer-expect-assertions": "off",
         "vitest/prefer-to-be-falsy": "off",
         "vitest/prefer-to-be-truthy": "off"
@@ -49,9 +67,27 @@
   "rules": {
     "eslint/no-param-reassign": ["error", { "props": true }],
     "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
+    "unicorn/import-style": [
+      "error",
+      {
+        "checkDynamicImport": true,
+        "checkExportFrom": true,
+        "checkImport": true,
+        "checkRequire": true,
+        "extendDefaultStyles": true,
+        "styles": {
+          "@stylexjs/stylex": { "namespace": true }
+        }
+      }
+    ],
     "import/no-unassigned-import": [
       "error",
       { "allow": ["**/*.css", "server-only", "client-only"] }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      { "allow": "as-needed", "extensions": [".tsx"], "ignoreFilesWithoutCode": false }
     ],
     "react/jsx-no-constructed-context-values": "error",
     "react/no-object-type-as-default-prop": "off",
@@ -69,6 +105,23 @@
         "allowString": false
       }
     ],
+    "typescript/no-floating-promises": [
+      "error",
+      {
+        "checkThenables": true,
+        "ignoreIIFE": false,
+        "ignoreVoid": false
+      }
+    ],
+    "typescript/no-misused-promises": [
+      "error",
+      {
+        "checksConditionals": true,
+        "checksSpreads": false,
+        "checksVoidReturn": false
+      }
+    ],
+    "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
 
     "eslint/id-length": "off",
     "eslint/max-classes-per-file": "off",
@@ -117,6 +170,7 @@
     "unicorn/no-negated-condition": "off",
     "unicorn/no-nested-ternary": "off",
     "unicorn/prefer-includes": "off",
+    "unicorn/prefer-string-starts-ends-with": "off",
     "eslint/no-ternary": "off",
     "eslint/no-underscore-dangle": "off",
     "eslint/no-implied-eval": "off",
