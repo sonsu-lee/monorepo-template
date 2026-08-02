@@ -1,7 +1,7 @@
-import { create, props } from '@stylexjs/stylex';
+import * as stylex from '@stylexjs/stylex';
 import Image from 'next/image';
 
-const styles = create({
+const styles = stylex.create({
   page: {
     alignItems: 'center',
     backgroundColor: {
@@ -146,22 +146,22 @@ const styles = create({
 
 export default function Home() {
   return (
-    <div {...props(styles.page)}>
-      <main {...props(styles.main)}>
+    <div {...stylex.props(styles.page)}>
+      <main {...stylex.props(styles.main)}>
         <Image
-          {...props(styles.logo)}
+          {...stylex.props(styles.logo)}
           src="/next.svg"
           alt="Next.js logo"
           width={100}
           height={20}
           priority
         />
-        <div {...props(styles.intro)}>
-          <h1 {...props(styles.introTitle)}>To get started, edit the page.tsx file.</h1>
-          <p {...props(styles.introText)}>
+        <div {...stylex.props(styles.intro)}>
+          <h1 {...stylex.props(styles.introTitle)}>To get started, edit the page.tsx file.</h1>
+          <p {...stylex.props(styles.introText)}>
             Looking for a starting point or more instructions? Head over to{' '}
             <a
-              {...props(styles.introLink)}
+              {...stylex.props(styles.introLink)}
               href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
@@ -170,7 +170,7 @@ export default function Home() {
             </a>{' '}
             or the{' '}
             <a
-              {...props(styles.introLink)}
+              {...stylex.props(styles.introLink)}
               href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
@@ -180,15 +180,15 @@ export default function Home() {
             center.
           </p>
         </div>
-        <div {...props(styles.ctas)}>
+        <div {...stylex.props(styles.ctas)}>
           <a
-            {...props(styles.cta, styles.primary)}
+            {...stylex.props(styles.cta, styles.primary)}
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
-              {...props(styles.logo)}
+              {...stylex.props(styles.logo)}
               src="/vercel.svg"
               alt="Vercel logomark"
               width={16}
@@ -197,7 +197,7 @@ export default function Home() {
             Deploy Now
           </a>
           <a
-            {...props(styles.cta, styles.secondary)}
+            {...stylex.props(styles.cta, styles.secondary)}
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"

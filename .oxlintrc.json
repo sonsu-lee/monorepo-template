@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["eslint", "import", "node", "oxc", "promise", "typescript", "unicorn"],
+  "plugins": ["import", "node", "oxc", "promise", "typescript", "unicorn"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -8,11 +8,14 @@
     "typeCheck": true
   },
   "rules": {
+    "typescript/no-confusing-non-null-assertion": "off",
     "typescript/no-empty-object-type": "error",
     "typescript/no-explicit-any": "error",
+    "typescript/no-extra-non-null-assertion": "off",
     "typescript/no-import-type-side-effects": "error",
     "typescript/no-invalid-void-type": "error",
-    "typescript/no-non-null-asserted-nullish-coalescing": "error",
+    "typescript/no-non-null-asserted-nullish-coalescing": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
     "typescript/no-non-null-assertion": "error",
     "typescript/no-require-imports": "error",
     "typescript/use-unknown-in-catch-callback-variable": "error",
@@ -21,6 +24,9 @@
     "oxc/no-accumulating-spread": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-useless-error-capture-stack-trace": "error",
-    "unicorn/no-array-sort": ["error", { "allowAfterSpread": true }]
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ]
   }
 }

@@ -14,7 +14,8 @@
     },
     "format:check": {},
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/.oxlintrc.json"]
     },
     "lint:fix": {
       "cache": false
