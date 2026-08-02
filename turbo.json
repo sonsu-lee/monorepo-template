@@ -14,8 +14,13 @@
     },
     "format:check": {},
     "lint": {
+      "cache": false,
       "dependsOn": ["^lint"],
-      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/.oxlintrc.json"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/.gitignore",
+        "$TURBO_ROOT$/.oxlintrc.json"
+      ]
     },
     "lint:fix": {
       "cache": false
@@ -47,6 +52,7 @@
       "persistent": true
     },
     "typecheck": {
+      "cache": false,
       "dependsOn": ["^typecheck"]
     }
   }
