@@ -29,7 +29,7 @@
   ],
   "overrides": [
     {
-      "files": ["**/*.{jsx,tsx}"],
+      "files": ["**/*.tsx"],
       "rules": {
         "eslint/func-style": "off"
       }
