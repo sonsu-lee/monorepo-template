@@ -1,0 +1,41 @@
+services:
+  garage:
+    image: dxflrs/garage:v2.3.0
+    command: [/garage, server, --single-node, --default-bucket]
+    environment:
+      GARAGE_DEFAULT_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY_ID:-GK0123456789abcdef0123456789abcdef}
+      GARAGE_DEFAULT_SECRET_KEY: ${OBJECT_STORAGE_SECRET_ACCESS_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      GARAGE_DEFAULT_BUCKET: ${OBJECT_STORAGE_BUCKET:-local-dev}
+    ports:
+      - 127.0.0.1:3900:3900
+      - 127.0.0.1:3903:3903
+    volumes:
+      - ./infra/garage/garage.toml:/etc/garage.toml:ro
+      - garage-meta:/var/lib/garage/meta
+      - garage-data:/var/lib/garage/data
+    healthcheck:
+      test: [CMD, /garage, status]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 2s
+    restart: unless-stopped
+
+  aws-cli:
+    image: public.ecr.aws/aws-cli/aws-cli:2.36.9
+    profiles: [tools]
+    depends_on:
+      garage:
+        condition: service_healthy
+    environment:
+      AWS_ACCESS_KEY_ID: ${OBJECT_STORAGE_ACCESS_KEY_ID:-GK0123456789abcdef0123456789abcdef}
+      AWS_SECRET_ACCESS_KEY: ${OBJECT_STORAGE_SECRET_ACCESS_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      AWS_DEFAULT_REGION: garage
+      AWS_REGION: garage
+      AWS_ENDPOINT_URL: http://garage:3900
+      AWS_EC2_METADATA_DISABLED: 'true'
+      AWS_PAGER: ''
+
+volumes:
+  garage-meta:
+  garage-data:
