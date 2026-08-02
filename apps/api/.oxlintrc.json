@@ -1,18 +1,30 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
   "extends": ["../../.oxlintrc.json"],
-  "plugins": [],
   "env": {
     "node": true
   },
   "categories": {
     "correctness": "error",
+    "perf": "error",
     "suspicious": "error"
   },
   "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
   "rules": {
     "typescript/consistent-type-definitions": ["error", "interface"],
-    "typescript/strict-boolean-expressions": "error",
+    "typescript/strict-boolean-expressions": [
+      "error",
+      {
+        "allowAny": false,
+        "allowNullableBoolean": false,
+        "allowNullableEnum": false,
+        "allowNullableNumber": false,
+        "allowNullableObject": false,
+        "allowNullableString": false,
+        "allowNumber": false,
+        "allowString": false
+      }
+    ],
     "typescript/no-floating-promises": [
       "error",
       {
@@ -33,7 +45,7 @@
       {
         "allowDefaultCaseForExhaustiveSwitch": false,
         "considerDefaultExhaustiveForUnions": false,
-        "requireDefaultForNonUnion": false
+        "requireDefaultForNonUnion": true
       }
     ],
     "typescript/no-unsafe-argument": "error",
@@ -41,6 +53,9 @@
     "typescript/no-unsafe-call": "error",
     "typescript/no-unsafe-member-access": "error",
     "typescript/no-unsafe-return": "error",
+    "eslint/no-await-in-loop": "off",
+    "eslint/no-implied-eval": "off",
+    "oxc/no-map-spread": "off",
     "unicorn/prefer-node-protocol": "error"
   }
 }

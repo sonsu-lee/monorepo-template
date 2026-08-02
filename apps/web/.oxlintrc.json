@@ -1,7 +1,7 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
   "extends": ["../../.oxlintrc.json"],
-  "plugins": ["jsdoc", "jsx-a11y", "nextjs", "react", "react-perf", "vitest"],
+  "plugins": ["jsdoc", "jsx-a11y", "nextjs", "react"],
   "env": {
     "browser": true,
     "node": true
@@ -14,6 +14,7 @@
   "categories": {
     "correctness": "error",
     "pedantic": "error",
+    "perf": "error",
     "suspicious": "error",
     "style": "error"
   },
@@ -28,10 +29,20 @@
   ],
   "overrides": [
     {
-      "files": ["e2e/**/*.spec.{ts,tsx}"],
+      "files": ["**/*.{jsx,tsx}"],
       "rules": {
-        "vitest/consistent-test-filename": "off",
-        "vitest/prefer-importing-vitest-globals": "off"
+        "eslint/func-style": "off"
+      }
+    },
+    {
+      "files": ["src/**/*.test.{ts,tsx}", "tests/integration/**/*.integration.test.{ts,tsx}"],
+      "plugins": ["vitest"],
+      "rules": {
+        "vitest/consistent-test-it": ["error", { "fn": "test" }],
+        "vitest/no-importing-vitest-globals": "off",
+        "vitest/prefer-expect-assertions": "off",
+        "vitest/prefer-to-be-falsy": "off",
+        "vitest/prefer-to-be-truthy": "off"
       }
     }
   ],
@@ -43,9 +54,21 @@
       { "allow": ["**/*.css", "server-only", "client-only"] }
     ],
     "react/jsx-no-constructed-context-values": "error",
-    "react/no-object-type-as-default-prop": "error",
-    "react/react-compiler": "error",
-    "vitest/consistent-test-it": ["error", { "fn": "test" }],
+    "react/no-object-type-as-default-prop": "off",
+    "react/react-compiler": ["error", { "reportAllBailouts": false }],
+    "typescript/strict-boolean-expressions": [
+      "error",
+      {
+        "allowAny": false,
+        "allowNullableBoolean": false,
+        "allowNullableEnum": false,
+        "allowNullableNumber": false,
+        "allowNullableObject": false,
+        "allowNullableString": false,
+        "allowNumber": false,
+        "allowString": false
+      }
+    ],
 
     "eslint/id-length": "off",
     "eslint/max-classes-per-file": "off",
@@ -56,6 +79,8 @@
     "eslint/max-params": "off",
     "eslint/max-statements": "off",
     "eslint/new-cap": "off",
+    "eslint/no-await-in-loop": "off",
+    "eslint/no-duplicate-imports": "off",
     "eslint/no-inline-comments": "off",
     "eslint/no-magic-numbers": "off",
     "eslint/no-warning-comments": "off",
@@ -77,6 +102,7 @@
     "jsdoc/require-yields-description": "off",
     "jsdoc/require-yields-type": "off",
     "node/no-sync": "off",
+    "oxc/no-map-spread": "off",
     "promise/avoid-new": "off",
     "promise/prefer-await-to-callbacks": "off",
     "promise/prefer-await-to-then": "off",
@@ -84,14 +110,13 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
-    "vitest/no-importing-vitest-globals": "off",
-    "vitest/prefer-expect-assertions": "off",
-    "vitest/prefer-to-be-falsy": "off",
-    "vitest/prefer-to-be-truthy": "off",
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",
     "import/no-nodejs-modules": "off",
     "unicorn/no-null": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/no-nested-ternary": "off",
+    "unicorn/prefer-includes": "off",
     "eslint/no-ternary": "off",
     "eslint/no-underscore-dangle": "off",
     "eslint/no-implied-eval": "off",
@@ -99,6 +124,7 @@
     "eslint/prefer-promise-reject-errors": "off",
     "eslint/require-await": "off",
     "react/no-array-index-key": "error",
+    "typescript/prefer-find": "off",
     "typescript/prefer-readonly-parameter-types": "off",
     "eslint/no-proto": "error",
     "react/button-has-type": "error",
