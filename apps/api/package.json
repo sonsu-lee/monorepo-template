@@ -1,24 +1,66 @@
 {
   "name": "api",
-  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "license": "UNLICENSED",
+  "author": "",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "nest build",
+    "dev": "nest start --watch",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
-    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:coverage": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@hono/node-server": "^2.0.12",
-    "hono": "^4.12.32"
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/platform-fastify": "^11.0.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
+    "jest": "^30.0.0",
     "oxfmt": "0.60.0",
-    "tsx": "^4.23.0",
-    "typescript": "^7.0.2"
+    "source-map-support": "^0.5.21",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testEnvironment": "node",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    }
   }
 }

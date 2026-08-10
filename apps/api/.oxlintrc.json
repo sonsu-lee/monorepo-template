@@ -2,6 +2,7 @@
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
   "extends": ["../../.oxlintrc.json"],
   "env": {
+    "jest": true,
     "node": true
   },
   "categories": {
@@ -12,6 +13,14 @@
     "suspicious": "error"
   },
   "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
+  "overrides": [
+    {
+      "files": ["src/**/*.ts"],
+      "rules": {
+        "typescript/consistent-type-imports": "off"
+      }
+    }
+  ],
   "rules": {
     "eslint/complexity": ["error", { "max": 20, "variant": "classic" }],
     "eslint/max-lines-per-function": [
@@ -39,6 +48,7 @@
         "ignoreTypeIndexes": true
       }
     ],
+    "eslint/new-cap": ["error", { "capIsNew": false }],
     "eslint/no-param-reassign": ["error", { "props": true }],
     "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "import/no-unassigned-import": [
@@ -59,11 +69,6 @@
             "from": "package",
             "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
             "package": "@types/node"
-          },
-          {
-            "from": "package",
-            "name": ["Context", "HTTPResponseError", "Next"],
-            "package": "hono"
           }
         ],
         "ignoreInferredTypes": false,
@@ -119,6 +124,8 @@
     "typescript/no-unsafe-call": "error",
     "typescript/no-unsafe-member-access": "error",
     "typescript/no-unsafe-return": "error",
+    "typescript/no-extraneous-class": ["error", { "allowWithDecorator": true }],
+    "typescript/parameter-properties": ["error", { "prefer": "parameter-property" }],
 
     "eslint/init-declarations": "off",
     "eslint/no-await-in-loop": "off",
