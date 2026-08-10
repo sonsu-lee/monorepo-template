@@ -30,7 +30,8 @@ pnpm dev
 ```
 
 The web application starts on `http://localhost:3000` and the API starts on
-`http://localhost:3001`. Set `PORT` to override the API port.
+`http://localhost:3001`. Set `HOST` or `PORT` to override the API bind address
+or port.
 
 Garage is optional and runs separately from the applications. Start it first
 when working with object storage:
