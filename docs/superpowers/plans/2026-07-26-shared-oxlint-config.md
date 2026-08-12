@@ -1,5 +1,14 @@
 # Shared Oxlint Configuration Implementation Plan
 
+> **Status:** Superseded. The repository-root Oxlint configuration was removed;
+> `apps/api/.oxlintrc.json` and `apps/web/.oxlintrc.json` now own complete,
+> self-contained policies. See `docs/agent-references/oxlint-policy.md` for the
+> current source of truth.
+
+> Historical implementation plan. The current policy and rationale are defined
+> in [`docs/agent-references/oxlint-policy.md`](../../agent-references/oxlint-policy.md);
+> current configuration files are the source of truth.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Move the Oxlint policy that is already identical in the web and API apps into one repository-root configuration without changing either app's lint behavior.

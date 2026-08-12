@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import type { NestFastifyApplication } from '@nestjs/platform-fastify';
@@ -13,6 +14,6 @@ const bootstrap = async (): Promise<void> => {
 };
 
 bootstrap().catch((error: unknown) => {
-  console.error(error);
+  Logger.error(error);
   process.exitCode = 1;
 });

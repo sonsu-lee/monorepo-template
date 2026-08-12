@@ -23,12 +23,11 @@
     "test:coverage": "turbo run test:coverage",
     "test:e2e": "turbo run test:e2e",
     "test:e2e:ui": "turbo run test:e2e:ui --filter=@repo/web",
-    "test:watch": "turbo run test:watch",
-    "typecheck": "turbo run typecheck"
+    "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
-    "oxlint": "^1.75.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "oxlint": "1.75.0",
+    "oxlint-tsgolint": "7.0.2001",
     "turbo": "2.10.5"
   }
 }

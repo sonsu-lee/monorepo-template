@@ -1,4 +1,3 @@
-// eslint-disable-next-line typescript/no-require-imports -- Next.js requires its Babel config to use CommonJS.
 const path = require('node:path');
 
 const dev = process.env.NODE_ENV !== 'production';

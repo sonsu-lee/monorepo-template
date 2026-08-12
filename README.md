@@ -54,9 +54,8 @@ pnpm --filter api dev
 | `pnpm build`          | Build all applications               |
 | `pnpm format`         | Format workspace files               |
 | `pnpm format:check`   | Check formatting                     |
-| `pnpm lint`           | Run strict, type-aware linting       |
+| `pnpm lint`           | Lint and run TypeScript diagnostics  |
 | `pnpm lint:fix`       | Fix supported lint violations        |
-| `pnpm typecheck`      | Type-check all applications          |
 | `pnpm test`           | Run tests once                       |
 | `pnpm test:watch`     | Run tests in watch mode              |
 | `pnpm test:coverage`  | Generate coverage reports            |

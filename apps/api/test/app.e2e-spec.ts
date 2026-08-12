@@ -19,14 +19,14 @@ describe('AppController (e2e)', () => {
     await app.getHttpAdapter().getInstance().ready();
   });
 
+  afterEach(async () => {
+    await app.close();
+  });
+
   it('/ (GET)', async () => {
     const response = await app.inject({ method: 'GET', url: '/' });
 
     expect(response.statusCode).toBe(HttpStatus.OK);
     expect(response.payload).toBe('Hello World!');
-  });
-
-  afterEach(async () => {
-    await app.close();
   });
 });

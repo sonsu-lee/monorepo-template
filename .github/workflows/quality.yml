@@ -50,17 +50,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Generate Next.js types
-        run: pnpm --filter @repo/web typegen
-
       - name: Check formatting
         run: pnpm exec turbo run format:check --force
 
-      - name: Lint
+      - name: Lint and type-check
         run: pnpm exec turbo run lint --force
-
-      - name: Type-check
-        run: pnpm exec turbo run typecheck --force
 
       - name: Run unit tests
         run: pnpm exec turbo run test --force

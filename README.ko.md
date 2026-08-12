@@ -54,9 +54,8 @@ pnpm --filter api dev
 | `pnpm build`          | 모든 애플리케이션 빌드                   |
 | `pnpm format`         | workspace 파일 포맷                      |
 | `pnpm format:check`   | 포맷 검사                                |
-| `pnpm lint`           | 엄격한 타입 인식 린트 실행               |
+| `pnpm lint`           | 린트와 TypeScript 진단 실행              |
 | `pnpm lint:fix`       | 자동 수정 가능한 린트 오류 수정          |
-| `pnpm typecheck`      | 모든 애플리케이션 타입 검사              |
 | `pnpm test`           | 테스트 한 번 실행                        |
 | `pnpm test:watch`     | 테스트 watch 모드 실행                   |
 | `pnpm test:coverage`  | 커버리지 보고서 생성                     |

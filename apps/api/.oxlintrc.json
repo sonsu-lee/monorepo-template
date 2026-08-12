@@ -1,8 +1,13 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
+  "plugins": ["import", "node", "oxc", "promise", "typescript", "unicorn"],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
   "env": {
-    "jest": true,
     "node": true
   },
   "categories": {
@@ -19,11 +24,130 @@
       "rules": {
         "typescript/consistent-type-imports": "off"
       }
+    },
+    {
+      "files": ["src/**/*.spec.ts", "test/**/*.ts"],
+      "env": {
+        "jest": true
+      },
+      "plugins": ["jest"],
+      "rules": {
+        "init-declarations": "off",
+        "max-lines-per-function": "off",
+        "max-statements": "off",
+        "no-magic-numbers": "off",
+        "no-restricted-globals": "off",
+        "no-restricted-imports": "off",
+        "node/no-sync": "off",
+        "typescript/prefer-readonly-parameter-types": "off",
+        "jest/consistent-test-it": ["error", { "fn": "it" }],
+        "jest/no-hooks": "off",
+        "jest/prefer-expect-assertions": "off",
+        "jest/prefer-importing-jest-globals": "off",
+        "jest/prefer-lowercase-title": "off"
+      }
+    },
+    {
+      "files": ["src/**/*.module.ts"],
+      "rules": {
+        "import/max-dependencies": ["error", { "ignoreTypeImports": true, "max": 20 }]
+      }
     }
   ],
   "rules": {
-    "eslint/complexity": ["error", { "max": 20, "variant": "classic" }],
-    "eslint/max-lines-per-function": [
+    "no-empty": "error",
+    "no-param-reassign": ["error", { "props": true }],
+    "no-proto": "error",
+    "no-sequences": "error",
+    "no-var": "error",
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "import/no-cycle": "error",
+    "node/no-path-concat": "error",
+    "oxc/no-accumulating-spread": "error",
+    "typescript/consistent-type-definitions": ["error", "interface"],
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-floating-promises": [
+      "error",
+      {
+        "checkThenables": true,
+        "ignoreIIFE": false,
+        "ignoreVoid": false
+      }
+    ],
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-invalid-void-type": "error",
+    "typescript/no-misused-promises": [
+      "error",
+      {
+        "checksConditionals": true,
+        "checksSpreads": false,
+        "checksVoidReturn": false
+      }
+    ],
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/strict-boolean-expressions": [
+      "error",
+      {
+        "allowAny": false,
+        "allowNullableBoolean": false,
+        "allowNullableEnum": false,
+        "allowNullableNumber": false,
+        "allowNullableObject": false,
+        "allowNullableString": false,
+        "allowNumber": false,
+        "allowString": false
+      }
+    ],
+    "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
+    "unicorn/no-useless-error-capture-stack-trace": "error",
+
+    "capitalized-comments": "off",
+    "func-style": "off",
+    "id-match": "off",
+    "no-await-in-loop": "off",
+    "no-duplicate-imports": "off",
+    "no-implied-eval": "off",
+    "no-inline-comments": "off",
+    "no-ternary": "off",
+    "no-throw-literal": "off",
+    "no-underscore-dangle": "off",
+    "no-warning-comments": "off",
+    "prefer-promise-reject-errors": "off",
+    "require-await": "off",
+    "sort-keys": "off",
+    "sort-vars": "off",
+    "vars-on-top": "off",
+    "import/no-named-export": "off",
+    "import/no-nodejs-modules": "off",
+    "import/prefer-default-export": "off",
+    "oxc/no-map-spread": "off",
+    "promise/avoid-new": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    "promise/prefer-await-to-then": "off",
+    "promise/prefer-catch": "off",
+    "typescript/ban-types": "off",
+    "typescript/no-confusing-non-null-assertion": "off",
+    "typescript/no-empty-interface": "off",
+    "typescript/no-extra-non-null-assertion": "off",
+    "typescript/no-non-null-asserted-nullish-coalescing": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
+    "typescript/prefer-find": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/no-nested-ternary": "off",
+    "unicorn/no-null": "off",
+    "unicorn/prefer-includes": "off",
+    "unicorn/prefer-string-starts-ends-with": "off",
+
+    "complexity": ["error", { "max": 20, "variant": "classic" }],
+    "max-lines-per-function": [
       "error",
       {
         "IIFEs": true,
@@ -32,8 +156,11 @@
         "skipComments": true
       }
     ],
-    "eslint/max-statements": ["error", { "ignoreTopLevelFunctions": false, "max": 20 }],
-    "eslint/no-magic-numbers": [
+    "max-params": ["error", { "max": 5 }],
+    "max-statements": ["error", { "ignoreTopLevelFunctions": false, "max": 20 }],
+    "new-cap": ["error", { "capIsNew": false }],
+    "no-console": "error",
+    "no-magic-numbers": [
       "error",
       {
         "detectObjects": false,
@@ -48,15 +175,53 @@
         "ignoreTypeIndexes": true
       }
     ],
-    "eslint/new-cap": ["error", { "capIsNew": false }],
-    "eslint/no-param-reassign": ["error", { "props": true }],
-    "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "no-restricted-globals": [
+      "error",
+      "afterAll",
+      "afterEach",
+      "beforeAll",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it",
+      "jest",
+      "test"
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@jest/globals",
+            "message": "Jest imports are only allowed in Jest test files."
+          },
+          {
+            "name": "jest",
+            "message": "Jest imports are only allowed in Jest test files."
+          }
+        ],
+        "patterns": [
+          {
+            "group": ["jest/*"],
+            "message": "Jest imports are only allowed in Jest test files."
+          }
+        ]
+      }
+    ],
+    "import/max-dependencies": ["error", { "ignoreTypeImports": true, "max": 10 }],
     "import/no-unassigned-import": [
       "error",
       { "allow": ["**/instrumentation.{js,ts}", "dotenv/config"] }
     ],
-    "node/callback-return": ["error", ["callback", "cb"]],
-    "typescript/consistent-type-definitions": ["error", "interface"],
+    "node/no-sync": ["error", { "allowAtRootLevel": true }],
+    "typescript/explicit-module-boundary-types": "error",
+    "typescript/no-extraneous-class": ["error", { "allowWithDecorator": true }],
+    "typescript/no-unsafe-argument": "error",
+    "typescript/no-unsafe-assignment": "error",
+    "typescript/no-unsafe-call": "error",
+    "typescript/no-unsafe-member-access": "error",
+    "typescript/no-unsafe-return": "error",
+    "typescript/parameter-properties": ["error", { "prefer": "parameter-property" }],
     "typescript/prefer-readonly-parameter-types": [
       "error",
       {
@@ -71,44 +236,9 @@
             "package": "@types/node"
           }
         ],
-        "ignoreInferredTypes": false,
+        "checkParameterProperties": false,
+        "ignoreInferredTypes": true,
         "treatMethodsAsReadonly": true
-      }
-    ],
-    "typescript/strict-boolean-expressions": [
-      "error",
-      {
-        "allowAny": false,
-        "allowNullableBoolean": false,
-        "allowNullableEnum": false,
-        "allowNullableNumber": false,
-        "allowNullableObject": false,
-        "allowNullableString": false,
-        "allowNumber": false,
-        "allowString": false
-      }
-    ],
-    "typescript/no-floating-promises": [
-      "error",
-      {
-        "checkThenables": true,
-        "ignoreIIFE": false,
-        "ignoreVoid": false
-      }
-    ],
-    "typescript/no-misused-promises": [
-      "error",
-      {
-        "checksConditionals": true,
-        "checksSpreads": false,
-        "checksVoidReturn": false
-      }
-    ],
-    "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
-    "typescript/no-unnecessary-condition": [
-      "error",
-      {
-        "checkTypePredicates": false
       }
     ],
     "typescript/switch-exhaustiveness-check": [
@@ -119,43 +249,17 @@
         "requireDefaultForNonUnion": true
       }
     ],
-    "typescript/no-unsafe-argument": "error",
-    "typescript/no-unsafe-assignment": "error",
-    "typescript/no-unsafe-call": "error",
-    "typescript/no-unsafe-member-access": "error",
-    "typescript/no-unsafe-return": "error",
-    "typescript/no-extraneous-class": ["error", { "allowWithDecorator": true }],
-    "typescript/parameter-properties": ["error", { "prefer": "parameter-property" }],
+    "unicorn/no-process-exit": "error",
+    "unicorn/prefer-node-protocol": "error",
 
-    "eslint/init-declarations": "off",
-    "eslint/no-await-in-loop": "off",
-    "eslint/no-duplicate-imports": "off",
-    "eslint/no-implied-eval": "off",
-    "eslint/no-new-wrappers": "off",
-    "eslint/no-ternary": "off",
-    "eslint/no-throw-literal": "off",
-    "eslint/prefer-promise-reject-errors": "off",
-    "eslint/require-await": "off",
     "import/exports-last": "off",
     "import/group-exports": "off",
-    "import/no-named-export": "off",
-    "import/no-nodejs-modules": "off",
-    "import/prefer-default-export": "off",
-    "promise/avoid-new": "off",
-    "promise/prefer-await-to-callbacks": "off",
-    "promise/prefer-await-to-then": "off",
-    "typescript/no-empty-interface": "off",
-    "typescript/prefer-find": "off",
+    "node/callback-return": "off",
+    "oxc/no-async-endpoint-handlers": "off",
     "unicorn/explicit-length-check": "off",
-    "unicorn/no-negated-condition": "off",
-    "unicorn/no-nested-ternary": "off",
-    "unicorn/no-null": "off",
+    "unicorn/no-console-spaces": "off",
     "unicorn/prefer-event-target": "off",
-    "unicorn/prefer-includes": "off",
     "unicorn/prefer-number-coercion": "off",
-    "unicorn/prefer-string-starts-ends-with": "off",
-    "unicorn/prefer-top-level-await": "off",
-    "oxc/no-map-spread": "off",
-    "unicorn/prefer-node-protocol": "error"
+    "unicorn/prefer-top-level-await": "off"
   }
 }

@@ -1,14 +1,38 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
-  "plugins": ["jsdoc", "jsx-a11y", "nextjs", "react"],
+  "plugins": [
+    "import",
+    "jsdoc",
+    "jsx-a11y",
+    "nextjs",
+    "node",
+    "oxc",
+    "promise",
+    "react",
+    "typescript",
+    "unicorn"
+  ],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
   "env": {
     "browser": true,
     "node": true
   },
   "settings": {
+    "jsx-a11y": {
+      "components": {
+        "Link": "a"
+      }
+    },
     "next": {
       "rootDir": "."
+    },
+    "react": {
+      "linkComponents": ["Link"]
     }
   },
   "categories": {
@@ -21,29 +45,189 @@
   "ignorePatterns": [
     ".next/**",
     ".turbo/**",
+    "blob-report/**",
     "coverage/**",
     "node_modules/**",
     "out/**",
+    "playwright-report/**",
+    "test-results/**",
     "next-env.d.ts",
     "*.tsbuildinfo"
   ],
   "overrides": [
     {
-      "files": ["**/*.tsx"],
+      "files": ["babel.config.js"],
       "rules": {
-        "eslint/func-style": "off"
+        "typescript/no-require-imports": "off"
       }
     },
     {
-      "files": ["**/*.{js,mjs,mts,ts,tsx}"],
+      "files": ["**/*.{cjs,cts,js,jsx,mjs,mts,ts,tsx}"],
       "rules": {
-        "eslint/no-restricted-imports": [
+        "no-restricted-imports": [
           "error",
           {
             "paths": [
               {
                 "name": "vitest",
-                "message": "Vitest files must use a configured .test.ts or .test.tsx filename."
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["vitest/*", "@vitest/*"],
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/**/*.{js,jsx,ts,tsx}"],
+      "excludeFiles": ["src/**/*.test.{ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              },
+              {
+                "name": "@tanstack/react-query",
+                "importNames": ["usePrefetchQuery", "useQuery"],
+                "message": "Use useDataPrefetch/useDataQuery from @/lib/query/query-hooks."
+              },
+              {
+                "name": "@xstate/react",
+                "importNames": ["useActor", "useActorRef", "useMachine", "useSelector"],
+                "message": "Use useMachineFlow from @/lib/machine-flow."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["vitest/*", "@vitest/*"],
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/lib/query/query-hooks.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              },
+              {
+                "name": "@xstate/react",
+                "importNames": ["useActor", "useActorRef", "useMachine", "useSelector"],
+                "message": "Use useMachineFlow from @/lib/machine-flow."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["vitest/*", "@vitest/*"],
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/lib/machine-flow/use-machine-flow.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              },
+              {
+                "name": "@tanstack/react-query",
+                "importNames": ["usePrefetchQuery", "useQuery"],
+                "message": "Use useDataPrefetch/useDataQuery from @/lib/query/query-hooks."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["vitest/*", "@vitest/*"],
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              },
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["vitest.config.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              },
+              {
+                "name": "@tanstack/react-query",
+                "importNames": ["usePrefetchQuery", "useQuery"],
+                "message": "Use useDataPrefetch/useDataQuery from @/lib/query/query-hooks."
+              },
+              {
+                "name": "@xstate/react",
+                "importNames": ["useActor", "useActorRef", "useMachine", "useSelector"],
+                "message": "Use useMachineFlow from @/lib/machine-flow."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
               }
             ]
           }
@@ -54,44 +238,114 @@
       "files": ["src/**/*.test.{ts,tsx}", "tests/integration/**/*.integration.test.{ts,tsx}"],
       "plugins": ["vitest"],
       "rules": {
-        "eslint/no-restricted-imports": "off",
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@playwright/test",
+                "message": "Playwright imports are only allowed in Playwright files."
+              },
+              {
+                "name": "@tanstack/react-query",
+                "importNames": ["usePrefetchQuery", "useQuery"],
+                "message": "Use useDataPrefetch/useDataQuery from @/lib/query/query-hooks."
+              },
+              {
+                "name": "@xstate/react",
+                "importNames": ["useActor", "useActorRef", "useMachine", "useSelector"],
+                "message": "Use useMachineFlow from @/lib/machine-flow."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["@playwright/test/*"],
+                "message": "Playwright imports are only allowed in Playwright files."
+              }
+            ]
+          }
+        ],
         "vitest/consistent-test-it": ["error", { "fn": "test" }],
-        "vitest/no-importing-vitest-globals": "off",
         "vitest/no-hooks": "off",
+        "vitest/no-importing-vitest-globals": "off",
         "vitest/prefer-expect-assertions": "off",
         "vitest/prefer-to-be-falsy": "off",
         "vitest/prefer-to-be-truthy": "off"
       }
+    },
+    {
+      "files": ["playwright.config.ts", "e2e/**/*.{js,jsx,ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["vitest/*", "@vitest/*"],
+                "message": "Vitest imports are only allowed in configured Vitest files."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/app/**/route.{js,ts}",
+        "src/**/actions.{js,ts}",
+        "{src/,}instrumentation.{js,ts}",
+        "{src/,}proxy.{js,ts}"
+      ],
+      "rules": {
+        "import/group-exports": "off"
+      }
+    },
+    {
+      "files": ["**/*.stylex.{js,ts}"],
+      "rules": {
+        "import/no-default-export": "error"
+      }
     }
   ],
   "rules": {
-    "eslint/no-param-reassign": ["error", { "props": true }],
-    "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
-    "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
-    "unicorn/import-style": [
+    "no-empty": "error",
+    "no-param-reassign": ["error", { "props": true }],
+    "no-proto": "error",
+    "no-sequences": "error",
+    "no-var": "error",
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "import/no-cycle": "error",
+    "node/no-path-concat": "error",
+    "oxc/no-accumulating-spread": "error",
+    "typescript/consistent-type-definitions": ["error", "interface"],
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-floating-promises": [
       "error",
       {
-        "checkDynamicImport": true,
-        "checkExportFrom": true,
-        "checkImport": true,
-        "checkRequire": true,
-        "extendDefaultStyles": true,
-        "styles": {
-          "@stylexjs/stylex": { "namespace": true }
-        }
+        "checkThenables": true,
+        "ignoreIIFE": false,
+        "ignoreVoid": false
       }
     ],
-    "import/no-unassigned-import": [
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-invalid-void-type": "error",
+    "typescript/no-misused-promises": [
       "error",
-      { "allow": ["**/*.css", "server-only", "client-only"] }
+      {
+        "checksConditionals": true,
+        "checksSpreads": false,
+        "checksVoidReturn": false
+      }
     ],
-    "react/jsx-filename-extension": [
-      "error",
-      { "allow": "as-needed", "extensions": [".tsx"], "ignoreFilesWithoutCode": false }
-    ],
-    "react/jsx-no-constructed-context-values": "error",
-    "react/no-object-type-as-default-prop": "off",
-    "react/react-compiler": ["error", { "reportAllBailouts": false }],
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
     "typescript/strict-boolean-expressions": [
       "error",
       {
@@ -105,40 +359,104 @@
         "allowString": false
       }
     ],
-    "typescript/no-floating-promises": [
-      "error",
-      {
-        "checkThenables": true,
-        "ignoreIIFE": false,
-        "ignoreVoid": false
-      }
-    ],
-    "typescript/no-misused-promises": [
-      "error",
-      {
-        "checksConditionals": true,
-        "checksSpreads": false,
-        "checksVoidReturn": false
-      }
-    ],
     "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
+    "unicorn/no-useless-error-capture-stack-trace": "error",
 
-    "eslint/id-length": "off",
-    "eslint/max-classes-per-file": "off",
-    "eslint/max-depth": "off",
-    "eslint/max-lines": "off",
-    "eslint/max-lines-per-function": "off",
-    "eslint/max-nested-callbacks": "off",
-    "eslint/max-params": "off",
-    "eslint/max-statements": "off",
-    "eslint/new-cap": "off",
-    "eslint/no-await-in-loop": "off",
-    "eslint/no-duplicate-imports": "off",
-    "eslint/no-inline-comments": "off",
-    "eslint/no-magic-numbers": "off",
-    "eslint/no-warning-comments": "off",
-    "eslint/sort-keys": "off",
-    "eslint/sort-vars": "off",
+    "capitalized-comments": "off",
+    "func-style": "off",
+    "id-match": "off",
+    "no-await-in-loop": "off",
+    "no-duplicate-imports": "off",
+    "no-implied-eval": "off",
+    "no-inline-comments": "off",
+    "no-ternary": "off",
+    "no-throw-literal": "off",
+    "no-underscore-dangle": "off",
+    "no-warning-comments": "off",
+    "prefer-promise-reject-errors": "off",
+    "require-await": "off",
+    "sort-keys": "off",
+    "sort-vars": "off",
+    "vars-on-top": "off",
+    "import/no-named-export": "off",
+    "import/no-nodejs-modules": "off",
+    "import/prefer-default-export": "off",
+    "oxc/no-map-spread": "off",
+    "promise/avoid-new": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    "promise/prefer-await-to-then": "off",
+    "promise/prefer-catch": "off",
+    "typescript/ban-types": "off",
+    "typescript/no-confusing-non-null-assertion": "off",
+    "typescript/no-empty-interface": "off",
+    "typescript/no-extra-non-null-assertion": "off",
+    "typescript/no-non-null-asserted-nullish-coalescing": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
+    "typescript/prefer-find": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/no-nested-ternary": "off",
+    "unicorn/no-null": "off",
+    "unicorn/prefer-includes": "off",
+    "unicorn/prefer-string-starts-ends-with": "off",
+
+    "new-cap": ["error", { "capIsNew": false }],
+    "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
+    "import/no-unassigned-import": [
+      "error",
+      { "allow": ["**/*.css", "server-only", "client-only"] }
+    ],
+    "unicorn/import-style": [
+      "error",
+      {
+        "checkDynamicImport": true,
+        "checkExportFrom": true,
+        "checkImport": true,
+        "checkRequire": true,
+        "extendDefaultStyles": true,
+        "styles": {
+          "@stylexjs/stylex": { "namespace": true }
+        }
+      }
+    ],
+    "react/button-has-type": "error",
+    "react/forbid-dom-props": [
+      "error",
+      {
+        "forbid": [
+          {
+            "propName": "style",
+            "message": "Use StyleX instead of the inline style prop."
+          }
+        ]
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      { "allow": "as-needed", "extensions": [".tsx"], "ignoreFilesWithoutCode": false }
+    ],
+    "react/jsx-no-constructed-context-values": "error",
+    "react/no-array-index-key": "error",
+    "react/no-danger": "error",
+    "react/no-object-type-as-default-prop": "off",
+    "react/no-unknown-property": ["error", { "requireDataLowercase": true }],
+    "react/prefer-function-component": "error",
+    "react/react-compiler": ["error", { "reportAllBailouts": false }],
+
+    "id-length": "off",
+    "max-classes-per-file": "off",
+    "max-depth": "off",
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "max-nested-callbacks": "off",
+    "max-params": "off",
+    "max-statements": "off",
+    "no-magic-numbers": "off",
     "import/max-dependencies": "off",
     "jsdoc/require-param": "off",
     "jsdoc/require-param-description": "off",
@@ -155,34 +473,12 @@
     "jsdoc/require-yields-description": "off",
     "jsdoc/require-yields-type": "off",
     "node/no-sync": "off",
-    "oxc/no-map-spread": "off",
-    "promise/avoid-new": "off",
-    "promise/prefer-await-to-callbacks": "off",
-    "promise/prefer-await-to-then": "off",
-    "promise/prefer-catch": "off",
-    "react/react-in-jsx-scope": "off",
+    "oxc/no-async-endpoint-handlers": "off",
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-named-export": "off",
-    "import/prefer-default-export": "off",
-    "import/no-nodejs-modules": "off",
-    "unicorn/no-null": "off",
-    "unicorn/no-negated-condition": "off",
-    "unicorn/no-nested-ternary": "off",
-    "unicorn/prefer-includes": "off",
-    "unicorn/prefer-string-starts-ends-with": "off",
-    "eslint/no-ternary": "off",
-    "eslint/no-underscore-dangle": "off",
-    "eslint/no-implied-eval": "off",
-    "eslint/no-throw-literal": "off",
-    "eslint/prefer-promise-reject-errors": "off",
-    "eslint/require-await": "off",
-    "react/no-array-index-key": "error",
-    "typescript/prefer-find": "off",
+    "react/no-danger-with-children": "off",
+    "react/react-in-jsx-scope": "off",
     "typescript/prefer-readonly-parameter-types": "off",
-    "eslint/no-proto": "error",
-    "react/button-has-type": "error",
-    "react/no-unknown-property": ["error", { "requireDataLowercase": true }],
     "unicorn/max-nested-calls": "off"
   }
 }

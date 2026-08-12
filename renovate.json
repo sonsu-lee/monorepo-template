@@ -21,13 +21,6 @@
       "groupName": "Node.js LTS"
     },
     {
-      "description": "Track Next.js canary releases after the cooldown",
-      "matchManagers": ["npm"],
-      "matchPackageNames": ["next"],
-      "ignoreUnstable": false,
-      "respectLatest": false
-    },
-    {
       "description": "Group StyleX packages",
       "matchManagers": ["npm"],
       "matchPackageNames": ["@stylexjs/**"],

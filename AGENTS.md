@@ -13,6 +13,13 @@ The local guide mirrors the official
 [StyleX authoring guide](https://github.com/facebook/stylex/blob/main/packages/docs/static/llm/stylex-authoring.md)
 and was synced on 2026-07-23.
 
+## Oxlint
+
+Before changing or reviewing Oxlint configuration, read and follow
+`docs/agent-references/oxlint-policy.md`. Validate file overrides with matching
+probe files; `--print-config` alone does not expose every override behavior in
+the installed Oxlint version.
+
 ## Frontend state and data flow
 
 Before writing or reviewing React state, XState machines, TanStack Query code,
