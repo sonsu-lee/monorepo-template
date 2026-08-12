@@ -34,12 +34,10 @@
       "rules": {
         "init-declarations": "off",
         "max-lines-per-function": "off",
-        "max-statements": "off",
         "no-magic-numbers": "off",
         "no-restricted-globals": "off",
         "no-restricted-imports": "off",
         "node/no-sync": "off",
-        "typescript/prefer-readonly-parameter-types": "off",
         "jest/consistent-test-it": ["error", { "fn": "it" }],
         "jest/no-hooks": "off",
         "jest/prefer-expect-assertions": "off",
@@ -71,7 +69,6 @@
       "error",
       {
         "checkThenables": true,
-        "ignoreIIFE": false,
         "ignoreVoid": false
       }
     ],
@@ -80,27 +77,14 @@
     "typescript/no-misused-promises": [
       "error",
       {
-        "checksConditionals": true,
         "checksSpreads": false,
         "checksVoidReturn": false
       }
     ],
     "typescript/no-non-null-assertion": "error",
     "typescript/no-require-imports": "error",
-    "typescript/strict-boolean-expressions": [
-      "error",
-      {
-        "allowAny": false,
-        "allowNullableBoolean": false,
-        "allowNullableEnum": false,
-        "allowNullableNumber": false,
-        "allowNullableObject": false,
-        "allowNullableString": false,
-        "allowNumber": false,
-        "allowString": false
-      }
-    ],
-    "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
+    "typescript/strict-boolean-expressions": ["error", { "allowNumber": false }],
+    "typescript/strict-void-return": "error",
     "typescript/use-unknown-in-catch-callback-variable": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-array-sort": [
@@ -146,7 +130,7 @@
     "unicorn/prefer-includes": "off",
     "unicorn/prefer-string-starts-ends-with": "off",
 
-    "complexity": ["error", { "max": 20, "variant": "classic" }],
+    "complexity": ["error", { "max": 20 }],
     "max-lines-per-function": [
       "error",
       {
@@ -157,17 +141,14 @@
       }
     ],
     "max-params": ["error", { "max": 5 }],
-    "max-statements": ["error", { "ignoreTopLevelFunctions": false, "max": 20 }],
+    "max-statements": "off",
     "new-cap": ["error", { "capIsNew": false }],
     "no-console": "error",
     "no-magic-numbers": [
       "error",
       {
-        "detectObjects": false,
-        "enforceConst": false,
         "ignore": [-1, 0, 1],
         "ignoreArrayIndexes": true,
-        "ignoreClassFieldInitialValues": false,
         "ignoreDefaultValues": true,
         "ignoreEnums": true,
         "ignoreNumericLiteralTypes": true,
@@ -222,33 +203,8 @@
     "typescript/no-unsafe-member-access": "error",
     "typescript/no-unsafe-return": "error",
     "typescript/parameter-properties": ["error", { "prefer": "parameter-property" }],
-    "typescript/prefer-readonly-parameter-types": [
-      "error",
-      {
-        "allow": [
-          {
-            "from": "lib",
-            "name": ["AbortSignal", "Date", "Error", "Request", "Response"]
-          },
-          {
-            "from": "package",
-            "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
-            "package": "@types/node"
-          }
-        ],
-        "checkParameterProperties": false,
-        "ignoreInferredTypes": true,
-        "treatMethodsAsReadonly": true
-      }
-    ],
-    "typescript/switch-exhaustiveness-check": [
-      "error",
-      {
-        "allowDefaultCaseForExhaustiveSwitch": true,
-        "considerDefaultExhaustiveForUnions": false,
-        "requireDefaultForNonUnion": true
-      }
-    ],
+    "typescript/prefer-readonly-parameter-types": "off",
+    "typescript/switch-exhaustiveness-check": ["error", { "requireDefaultForNonUnion": true }],
     "unicorn/no-process-exit": "error",
     "unicorn/prefer-node-protocol": "error",
 

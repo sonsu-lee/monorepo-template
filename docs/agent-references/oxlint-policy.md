@@ -52,8 +52,10 @@ Both app configurations enforce the same framework-neutral contracts:
   object spread, CommonJS `require` in application code, and type-only import
   side effects are rejected.
 - Keep types explicit at unsafe boundaries: `any`, non-null assertions, empty
-  object types, invalid `void`, truthiness shortcuts, and non-`unknown` promise
-  rejection values are rejected.
+  object types, invalid `void`, ambiguous numeric truthiness, and non-`unknown`
+  promise rejection values are rejected. String and nullable-object guards remain
+  available for normal framework code; nullable primitive handling is stricter in
+  the API than in rendering code.
 - Promise failures must remain visible. Floating promises, promise conditions,
   and values returned from a void callback are rejected. `void promise` is not
   an escape hatch; handle or deliberately propagate the outcome.
@@ -98,6 +100,9 @@ framework adjustments.
 - Complexity and size metrics remain off for JSX, machine declarations, and
   tests. Splitting related render or state-machine logic only to satisfy a line
   count makes the code harder to read.
+- String and nullable-object conditions are allowed because non-empty and
+  presence checks are idiomatic in rendering. Numeric conditions remain
+  explicit so zero is not confused with absence.
 - Vitest and Playwright imports are mutually scoped to their configured files.
   Adding the Vitest plugin in the test override activates the app's categories
   for those files, including focused/disabled-test checks. Hooks are allowed,
@@ -111,6 +116,9 @@ framework adjustments.
   `queryOptions`, `useQueryClient`, or provider imports.
 - Playwright currently has no built-in Oxlint semantic plugin. Its files still
   receive the generic, import, and type-aware policies.
+- The JSDoc plugin is not enabled while the TypeScript application has no JSDoc
+  contract policy. Re-enable it only when JSDoc becomes an intentional public API
+  surface rather than carrying a large list of disabled documentation mandates.
 - The Babel config is the sole CommonJS exception. The installed Next.js Babel
   loader rejects `.mjs` and `.cjs` configs during a real production build, so a
   file-scoped config override is more accurate than an inline lint comment.
@@ -132,12 +140,17 @@ The API configuration adapts the shared policy to NestJS and Fastify.
   a type-only import, breaking runtime injection.
 - The Express-before-v5 async endpoint heuristic is disabled; Nest with Fastify
   owns endpoint rejection handling.
-- General functions are limited to complexity 20, 100 logical lines, 20
-  statements, and five parameters. Tests are exempt from the locality metrics,
-  and Nest module composition roots may import up to 20 runtime dependencies.
-- Explicitly typed public parameters are checked for readonly compatibility,
-  but inferred callbacks and Nest constructor properties are not. This protects
-  API contracts without requiring wrappers around mutable framework types.
+- General functions are limited to complexity 20, 100 logical lines, and five
+  parameters. Statement counts are not a policy because long straight-line
+  orchestration can remain readable, while splitting it only for a metric harms
+  locality. Tests are exempt from the remaining locality metrics, and Nest module
+  composition roots may import up to 20 runtime dependencies.
+- Deep readonly parameter compatibility is not enforced globally. Nest DTOs and
+  external framework types may be mutable by design; parameter reassignment and
+  mutating array sort remain independently rejected.
+- Non-null strings and nullable objects may be used as conditions. Nullable
+  strings and all numeric conditions stay explicit so API boundary semantics do
+  not silently collapse missing, empty, and zero values.
 - Unsafe typed values, missing exported return types, `console`, synchronous
   request-path I/O, and `process.exit()` are rejected. Bootstrap failures use
   Nest's `Logger` and set `process.exitCode`; `no-console` is the sole owner for
