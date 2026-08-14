@@ -18,6 +18,8 @@
   "devDependencies": {
     "@types/node": "^24.13.3",
     "oxfmt": "0.60.0",
+    "oxlint": "^1.75.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "tsx": "^4.23.0",
     "typescript": "^7.0.2"
   }

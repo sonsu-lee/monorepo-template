@@ -16,11 +16,7 @@
     "lint": {
       "cache": false,
       "dependsOn": ["^lint"],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "$TURBO_ROOT$/.gitignore",
-        "$TURBO_ROOT$/.oxlintrc.json"
-      ]
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/.gitignore"]
     },
     "lint:fix": {
       "cache": false

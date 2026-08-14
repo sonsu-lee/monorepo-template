@@ -11,7 +11,8 @@ API, managed with pnpm workspaces and Turborepo.
 | --------------- | ------------ | ---------------------------------------------- |
 | Web             | `apps/web`   | Next.js, React, StyleX, TanStack Query, XState |
 | API             | `apps/api`   | Hono, Node.js                                  |
-| Tooling         | Workspace    | Turborepo, TypeScript, oxfmt, oxlint           |
+| Tooling         | `apps/*`     | TypeScript, oxfmt, oxlint per application      |
+| Orchestration   | Workspace    | pnpm workspaces, Turborepo                     |
 | Tests           | `apps/web`   | Vitest, Playwright                             |
 | Shared packages | `packages/*` | Reserved for code shared across applications   |
 
