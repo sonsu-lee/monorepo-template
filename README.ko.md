@@ -17,17 +17,43 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 
 ## 요구사항
 
-- Node.js 24 LTS (`24.18.1` 이상인 24.x 버전)
-- pnpm `11.18.0`
+- [Nodeup](https://github.com/delinoio/oss/tree/main/crates/nodeup) `0.2.0`
+  이상
 - Docker Desktop 또는 Docker Compose v2를 지원하는 Docker Engine
   (로컬 오브젝트 스토리지를 사용할 때만 필요)
 
 ## 시작하기
 
+플랫폼별 설치 방법은 공식 문서를 따릅니다. macOS에서는 Homebrew로
+Nodeup을 설치합니다.
+
 ```bash
+brew install delinoio/tap/nodeup
+```
+
+저장소에서 사용할 toolchain을 설치하고 선택합니다.
+
+```bash
+nodeup toolchain install 24.18.1
+nodeup override set 24.18.1
+nodeup shim setup
+```
+
+`nodeup shim setup`이 출력하는 안내에 따라 PATH를 설정한 뒤 새 shell을
+시작합니다. directory override가 Node.js `24.18.1`을 선택하고 Nodeup은
+`packageManager`를 읽어 pnpm `11.18.0`으로 명령을 위임합니다.
+
+```bash
+node --version
+pnpm --version
 pnpm install
 pnpm dev
 ```
+
+`package.json`의 정확한 버전이 이 저장소의 정본입니다. Nodeup의 directory
+override는 저장소 밖에 보관되므로 별도 `.node-version` 파일을 의도적으로
+사용하지 않습니다. CI도 `engines.node`에서 런타임을 읽고 동일한 Nodeup
+shim 경로를 검증합니다.
 
 Garage는 선택 사항이며 애플리케이션과 별도로 실행됩니다. 오브젝트
 스토리지를 사용하는 작업에서는 먼저 Garage를 시작합니다.

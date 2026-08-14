@@ -1,0 +1,51 @@
+name: Set up Nodeup toolchain
+description: Install the repository's exact Node.js and pnpm toolchain through Nodeup
+
+inputs:
+  nodeup-version:
+    description: Exact Nodeup version to install
+    required: false
+    default: "0.2.0"
+
+runs:
+  using: composite
+  steps:
+    - name: Install cargo-binstall
+      uses: taiki-e/install-action@82cd3e7658a6f96c86c0234aeeda1748937cb0a1 # v2.85.13
+      with:
+        tool: cargo-binstall
+
+    - name: Install Nodeup
+      shell: bash
+      env:
+        NODEUP_VERSION: ${{ inputs.nodeup-version }}
+      run: cargo binstall "nodeup@${NODEUP_VERSION}" --no-confirm
+
+    - name: Configure repository toolchain
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        runtime_version="$(
+          jq -er \
+            '.engines.node | select(type == "string" and test("^[0-9]+[.][0-9]+[.][0-9]+$"))' \
+            "$GITHUB_WORKSPACE/package.json"
+        )"
+        package_manager="$(
+          jq -er \
+            '.packageManager | select(type == "string" and test("^pnpm@[0-9]+[.][0-9]+[.][0-9]+([+].*)?$"))' \
+            "$GITHUB_WORKSPACE/package.json"
+        )"
+        pnpm_version="${package_manager#pnpm@}"
+        pnpm_version="${pnpm_version%%+*}"
+
+        shim_dir="$RUNNER_TEMP/nodeup-shims"
+
+        nodeup toolchain install "$runtime_version"
+        nodeup override set "$runtime_version" --path "$GITHUB_WORKSPACE"
+        nodeup shim setup --dir "$shim_dir"
+
+        test "$("$shim_dir/node" --version)" = "v${runtime_version}"
+        test "$("$shim_dir/pnpm" --version)" = "$pnpm_version"
+
+        echo "$shim_dir" >> "$GITHUB_PATH"

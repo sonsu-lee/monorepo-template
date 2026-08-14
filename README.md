@@ -17,17 +17,43 @@ API, managed with pnpm workspaces and Turborepo.
 
 ## Requirements
 
-- Node.js 24 LTS (`24.18.1` or newer within the 24.x line)
-- pnpm `11.18.0`
+- [Nodeup](https://github.com/delinoio/oss/tree/main/crates/nodeup) `0.2.0` or
+  newer
 - Docker Desktop or Docker Engine with Docker Compose v2 (required only for
   local object storage)
 
 ## Getting started
 
+Follow the upstream installation guide for your platform. On macOS, install
+Nodeup with Homebrew:
+
 ```bash
+brew install delinoio/tap/nodeup
+```
+
+Then install and select the repository toolchain:
+
+```bash
+nodeup toolchain install 24.18.1
+nodeup override set 24.18.1
+nodeup shim setup
+```
+
+Follow the PATH instruction printed by `nodeup shim setup`, then start a new
+shell. The directory override selects Node.js `24.18.1`, while Nodeup reads
+`packageManager` and dispatches pnpm `11.18.0`:
+
+```bash
+node --version
+pnpm --version
 pnpm install
 pnpm dev
 ```
+
+The exact versions in `package.json` are the repository's source of truth.
+Nodeup stores the directory override outside the repository, so a separate
+`.node-version` file is intentionally not used. CI derives the runtime from
+`engines.node` and exercises the same Nodeup shims.
 
 Garage is optional and runs separately from the applications. Start it first
 when working with object storage:
