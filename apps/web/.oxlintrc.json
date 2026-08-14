@@ -1,7 +1,23 @@
 {
-  "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
-  "plugins": ["jsdoc", "jsx-a11y", "nextjs", "react"],
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "import",
+    "jsdoc",
+    "jsx-a11y",
+    "nextjs",
+    "node",
+    "oxc",
+    "promise",
+    "react",
+    "typescript",
+    "unicorn"
+  ],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
   "env": {
     "browser": true,
     "node": true
@@ -65,6 +81,26 @@
     }
   ],
   "rules": {
+    "typescript/no-confusing-non-null-assertion": "off",
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-extra-non-null-assertion": "off",
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-invalid-void-type": "error",
+    "typescript/no-non-null-asserted-nullish-coalescing": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+    "import/no-cycle": "error",
+    "node/no-path-concat": "error",
+    "oxc/no-accumulating-spread": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/no-useless-error-capture-stack-trace": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
     "eslint/no-param-reassign": ["error", { "props": true }],
     "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],

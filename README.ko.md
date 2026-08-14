@@ -11,7 +11,8 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 | ----------- | ------------ | ---------------------------------------------- |
 | 웹          | `apps/web`   | Next.js, React, StyleX, TanStack Query, XState |
 | API         | `apps/api`   | Hono, Node.js                                  |
-| 도구        | workspace    | Turborepo, TypeScript, oxfmt, oxlint           |
+| 도구        | `apps/*`     | 애플리케이션별 TypeScript, oxfmt, oxlint       |
+| 실행 관리   | workspace    | pnpm workspace, Turborepo                      |
 | 테스트      | `apps/web`   | Vitest, Playwright                             |
 | 공통 패키지 | `packages/*` | 애플리케이션에서 공유할 코드를 위한 경로       |
 

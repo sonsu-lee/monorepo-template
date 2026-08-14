@@ -8,12 +8,6 @@ importers:
 
   .:
     devDependencies:
-      oxlint:
-        specifier: ^1.75.0
-        version: 1.75.0(oxlint-tsgolint@7.0.2001)
-      oxlint-tsgolint:
-        specifier: ^7.0.2001
-        version: 7.0.2001
       turbo:
         specifier: 2.10.5
         version: 2.10.5
@@ -33,6 +27,12 @@ importers:
       oxfmt:
         specifier: 0.60.0
         version: 0.60.0
+      oxlint:
+        specifier: ^1.75.0
+        version: 1.75.0(oxlint-tsgolint@7.0.2001)
+      oxlint-tsgolint:
+        specifier: ^7.0.2001
+        version: 7.0.2001
       tsx:
         specifier: ^4.23.0
         version: 4.23.1
@@ -94,6 +94,12 @@ importers:
       oxfmt:
         specifier: 0.60.0
         version: 0.60.0
+      oxlint:
+        specifier: ^1.75.0
+        version: 1.75.0(oxlint-tsgolint@7.0.2001)
+      oxlint-tsgolint:
+        specifier: ^7.0.2001
+        version: 7.0.2001
       typescript:
         specifier: ^7.0.2
         version: 7.0.2

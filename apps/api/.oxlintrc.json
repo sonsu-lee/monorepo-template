@@ -1,6 +1,12 @@
 {
-  "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "node", "oxc", "promise", "typescript", "unicorn"],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
   "env": {
     "node": true
   },
@@ -13,6 +19,26 @@
   },
   "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
   "rules": {
+    "typescript/no-confusing-non-null-assertion": "off",
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-extra-non-null-assertion": "off",
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-invalid-void-type": "error",
+    "typescript/no-non-null-asserted-nullish-coalescing": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+    "import/no-cycle": "error",
+    "node/no-path-concat": "error",
+    "oxc/no-accumulating-spread": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/no-useless-error-capture-stack-trace": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
     "eslint/complexity": ["error", { "max": 20, "variant": "classic" }],
     "eslint/max-lines-per-function": [
       "error",
