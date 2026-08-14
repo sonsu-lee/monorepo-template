@@ -8,6 +8,7 @@
     "typeCheck": true
   },
   "rules": {
+    "eslint/one-var": "off",
     "typescript/no-confusing-non-null-assertion": "off",
     "typescript/no-empty-object-type": "error",
     "typescript/no-explicit-any": "error",

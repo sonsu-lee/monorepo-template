@@ -37,7 +37,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "autoprefixer": "^10.5.4",
     "babel-plugin-react-compiler": "1.0.0",
-    "oxfmt": "0.60.0",
+    "oxfmt": "0.63.0",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }
