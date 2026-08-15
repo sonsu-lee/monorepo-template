@@ -2,7 +2,6 @@
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": [
     "import",
-    "jsdoc",
     "jsx-a11y",
     "nextjs",
     "node",
@@ -92,26 +91,16 @@
     "typescript/use-unknown-in-catch-callback-variable": "error",
     "import/no-cycle": "error",
     "node/no-path-concat": "error",
-    "oxc/no-accumulating-spread": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-useless-error-capture-stack-trace": "error",
-    "unicorn/no-array-sort": [
-      "error",
-      { "allowAfterSpread": true, "allowExpressionStatement": false }
-    ],
     "eslint/max-lines-per-function": ["error", 100],
     "eslint/max-nested-callbacks": ["error", 3],
     "eslint/no-param-reassign": ["error", { "props": true }],
-    "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
     "unicorn/import-style": [
       "error",
       {
-        "checkDynamicImport": true,
         "checkExportFrom": true,
-        "checkImport": true,
-        "checkRequire": true,
-        "extendDefaultStyles": true,
         "styles": {
           "@stylexjs/stylex": { "namespace": true }
         }
@@ -121,69 +110,29 @@
       "error",
       { "allow": ["**/*.css", "server-only", "client-only"] }
     ],
-    "react/jsx-filename-extension": [
-      "error",
-      { "allow": "as-needed", "extensions": [".tsx"], "ignoreFilesWithoutCode": false }
-    ],
+    "react/jsx-filename-extension": ["error", { "allow": "as-needed", "extensions": [".tsx"] }],
     "react/jsx-max-depth": ["error", { "max": 4 }],
-    "react/jsx-no-constructed-context-values": "error",
     "react/no-object-type-as-default-prop": "off",
-    "react/react-compiler": ["error", { "reportAllBailouts": false }],
+    "react/react-compiler": "error",
     "typescript/strict-boolean-expressions": [
       "error",
       {
-        "allowAny": false,
-        "allowNullableBoolean": false,
-        "allowNullableEnum": false,
-        "allowNullableNumber": false,
         "allowNullableObject": false,
-        "allowNullableString": false,
         "allowNumber": false,
         "allowString": false
       }
     ],
-    "typescript/no-floating-promises": [
-      "error",
-      {
-        "checkThenables": true,
-        "ignoreIIFE": false,
-        "ignoreVoid": false
-      }
-    ],
-    "typescript/no-misused-promises": [
-      "error",
-      {
-        "checksConditionals": true,
-        "checksSpreads": false,
-        "checksVoidReturn": false
-      }
-    ],
-    "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
+    "typescript/no-floating-promises": ["error", { "checkThenables": true }],
 
     "eslint/id-length": "off",
     "eslint/max-statements": "off",
     "eslint/new-cap": "off",
     "eslint/no-await-in-loop": "off",
     "eslint/no-duplicate-imports": "off",
-    "eslint/no-inline-comments": "off",
     "eslint/no-magic-numbers": "off",
-    "eslint/no-warning-comments": "off",
     "eslint/sort-keys": "off",
+    "eslint/sort-imports": "off",
     "eslint/sort-vars": "off",
-    "jsdoc/require-param": "off",
-    "jsdoc/require-param-description": "off",
-    "jsdoc/require-param-type": "off",
-    "jsdoc/require-property": "off",
-    "jsdoc/require-property-description": "off",
-    "jsdoc/require-property-type": "off",
-    "jsdoc/require-returns": "off",
-    "jsdoc/require-returns-description": "off",
-    "jsdoc/require-returns-type": "off",
-    "jsdoc/require-throws-description": "off",
-    "jsdoc/require-throws-type": "off",
-    "jsdoc/require-yields": "off",
-    "jsdoc/require-yields-description": "off",
-    "jsdoc/require-yields-type": "off",
     "node/no-sync": "off",
     "oxc/no-map-spread": "off",
     "promise/avoid-new": "off",
@@ -196,8 +145,6 @@
     "import/prefer-default-export": "off",
     "import/no-nodejs-modules": "off",
     "unicorn/no-null": "off",
-    "unicorn/no-negated-condition": "off",
-    "unicorn/no-nested-ternary": "off",
     "unicorn/prefer-includes": "off",
     "unicorn/prefer-string-starts-ends-with": "off",
     "eslint/no-ternary": "off",
@@ -206,7 +153,6 @@
     "eslint/no-throw-literal": "off",
     "eslint/prefer-promise-reject-errors": "off",
     "eslint/require-await": "off",
-    "react/no-array-index-key": "error",
     "typescript/prefer-find": "off",
     "typescript/prefer-readonly-parameter-types": "off",
     "eslint/no-proto": "error",
