@@ -44,6 +44,12 @@
   ],
   "overrides": [
     {
+      "files": ["**/*.{js,jsx,mjs,cjs}"],
+      "rules": {
+        "eslint/no-undef": "error"
+      }
+    },
+    {
       "files": ["**/*.tsx"],
       "rules": {
         "eslint/func-style": "off"
