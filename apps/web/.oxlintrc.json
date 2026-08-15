@@ -119,7 +119,7 @@
         "allowString": false
       }
     ],
-    "typescript/no-floating-promises": ["error", { "checkThenables": true }],
+    "typescript/no-floating-promises": ["error", { "checkThenables": true, "ignoreVoid": false }],
 
     "eslint/id-length": "off",
     "eslint/max-classes-per-file": "off",
