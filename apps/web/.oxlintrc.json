@@ -93,6 +93,10 @@
     "node/no-path-concat": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-useless-error-capture-stack-trace": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
     "eslint/no-param-reassign": ["error", { "props": true }],
     "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
     "unicorn/import-style": [
