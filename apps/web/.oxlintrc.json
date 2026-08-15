@@ -73,7 +73,6 @@
         "eslint/no-restricted-imports": "off",
         "vitest/consistent-test-it": ["error", { "fn": "test" }],
         "vitest/no-importing-vitest-globals": "off",
-        "vitest/no-hooks": "off",
         "vitest/prefer-expect-assertions": "off",
         "vitest/prefer-to-be-falsy": "off",
         "vitest/prefer-to-be-truthy": "off"
@@ -87,7 +86,6 @@
     "typescript/no-extra-non-null-assertion": "off",
     "typescript/no-import-type-side-effects": "error",
     "typescript/no-invalid-void-type": "error",
-    "typescript/no-non-null-asserted-nullish-coalescing": "off",
     "typescript/no-non-null-asserted-optional-chain": "off",
     "typescript/no-non-null-assertion": "error",
     "typescript/no-require-imports": "error",
@@ -101,6 +99,8 @@
       "error",
       { "allowAfterSpread": true, "allowExpressionStatement": false }
     ],
+    "eslint/max-lines-per-function": ["error", 100],
+    "eslint/max-nested-callbacks": ["error", 3],
     "eslint/no-param-reassign": ["error", { "props": true }],
     "eslint/sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
@@ -125,6 +125,7 @@
       "error",
       { "allow": "as-needed", "extensions": [".tsx"], "ignoreFilesWithoutCode": false }
     ],
+    "react/jsx-max-depth": ["error", { "max": 4 }],
     "react/jsx-no-constructed-context-values": "error",
     "react/no-object-type-as-default-prop": "off",
     "react/react-compiler": ["error", { "reportAllBailouts": false }],
@@ -160,12 +161,6 @@
     "typescript/strict-void-return": ["error", { "allowReturnAny": false }],
 
     "eslint/id-length": "off",
-    "eslint/max-classes-per-file": "off",
-    "eslint/max-depth": "off",
-    "eslint/max-lines": "off",
-    "eslint/max-lines-per-function": "off",
-    "eslint/max-nested-callbacks": "off",
-    "eslint/max-params": "off",
     "eslint/max-statements": "off",
     "eslint/new-cap": "off",
     "eslint/no-await-in-loop": "off",
@@ -175,7 +170,6 @@
     "eslint/no-warning-comments": "off",
     "eslint/sort-keys": "off",
     "eslint/sort-vars": "off",
-    "import/max-dependencies": "off",
     "jsdoc/require-param": "off",
     "jsdoc/require-param-description": "off",
     "jsdoc/require-param-type": "off",
@@ -197,7 +191,6 @@
     "promise/prefer-await-to-then": "off",
     "promise/prefer-catch": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",
@@ -218,7 +211,6 @@
     "typescript/prefer-readonly-parameter-types": "off",
     "eslint/no-proto": "error",
     "react/button-has-type": "error",
-    "react/no-unknown-property": ["error", { "requireDataLowercase": true }],
-    "unicorn/max-nested-calls": "off"
+    "react/no-unknown-property": ["error", { "requireDataLowercase": true }]
   }
 }
