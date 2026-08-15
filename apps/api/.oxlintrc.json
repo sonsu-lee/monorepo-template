@@ -12,80 +12,12 @@
   },
   "categories": {
     "correctness": "error",
+    "suspicious": "error",
     "pedantic": "error",
     "perf": "error",
-    "style": "error",
-    "suspicious": "error"
+    "style": "error"
   },
-  "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
-  "overrides": [
-    {
-      "files": ["**/*.{js,mjs,cjs}"],
-      "rules": {
-        "eslint/no-undef": "error"
-      }
-    }
-  ],
   "rules": {
-    "eslint/no-param-reassign": ["error", { "props": true }],
-    "eslint/no-proto": "error",
-    "import/no-cycle": "error",
-    "import/no-unassigned-import": [
-      "error",
-      { "allow": ["**/instrumentation.{js,ts}", "dotenv/config"] }
-    ],
-    "node/callback-return": ["error", ["callback", "cb"]],
-    "node/no-path-concat": "error",
-    "typescript/no-confusing-non-null-assertion": "off",
-    "typescript/no-empty-object-type": "error",
-    "typescript/no-explicit-any": "error",
-    "typescript/no-extra-non-null-assertion": "off",
-    "typescript/no-floating-promises": ["error", { "checkThenables": true, "ignoreVoid": false }],
-    "typescript/no-import-type-side-effects": "error",
-    "typescript/no-invalid-void-type": "error",
-    "typescript/no-non-null-asserted-optional-chain": "off",
-    "typescript/no-non-null-assertion": "error",
-    "typescript/no-require-imports": "error",
-    "typescript/prefer-readonly-parameter-types": [
-      "error",
-      {
-        "allow": [
-          {
-            "from": "lib",
-            "name": ["AbortSignal", "Date", "Error", "Request", "Response"]
-          },
-          {
-            "from": "package",
-            "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
-            "package": "@types/node"
-          },
-          {
-            "from": "package",
-            "name": ["Context", "HTTPResponseError", "Next"],
-            "package": "hono"
-          }
-        ],
-        "treatMethodsAsReadonly": true
-      }
-    ],
-    "typescript/strict-boolean-expressions": [
-      "error",
-      {
-        "allowNullableObject": false,
-        "allowNumber": false,
-        "allowString": false
-      }
-    ],
-    "typescript/switch-exhaustiveness-check": ["error", { "requireDefaultForNonUnion": true }],
-    "typescript/use-unknown-in-catch-callback-variable": "error",
-    "unicorn/no-abusive-eslint-disable": "error",
-    "unicorn/no-array-sort": [
-      "error",
-      { "allowAfterSpread": true, "allowExpressionStatement": false }
-    ],
-    "unicorn/no-useless-error-capture-stack-trace": "error",
-    "unicorn/prefer-node-protocol": "error",
-
     "eslint/id-length": "off",
     "eslint/init-declarations": "off",
     "eslint/max-classes-per-file": "off",
@@ -119,7 +51,10 @@
     "promise/avoid-new": "off",
     "promise/prefer-await-to-callbacks": "off",
     "promise/prefer-await-to-then": "off",
+    "typescript/no-confusing-non-null-assertion": "off",
     "typescript/no-empty-interface": "off",
+    "typescript/no-extra-non-null-assertion": "off",
+    "typescript/no-non-null-asserted-optional-chain": "off",
     "typescript/prefer-find": "off",
     "unicorn/explicit-length-check": "off",
     "unicorn/max-nested-calls": "off",
@@ -130,6 +65,53 @@
     "unicorn/prefer-includes": "off",
     "unicorn/prefer-number-coercion": "off",
     "unicorn/prefer-string-starts-ends-with": "off",
-    "unicorn/prefer-top-level-await": "off"
-  }
+    "unicorn/prefer-top-level-await": "off",
+
+    "eslint/no-param-reassign": ["error", { "props": true }],
+    "eslint/no-proto": "error",
+    "import/no-cycle": "error",
+    "import/no-unassigned-import": [
+      "error",
+      { "allow": ["**/instrumentation.{js,ts}", "dotenv/config"] }
+    ],
+    "node/callback-return": ["error", ["callback", "cb"]],
+    "node/no-path-concat": "error",
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-floating-promises": ["error", { "checkThenables": true, "ignoreVoid": false }],
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-invalid-void-type": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/prefer-readonly-parameter-types": [
+      "error",
+      {
+        "allow": [
+          { "from": "lib", "name": ["AbortSignal", "Date", "Error", "Request", "Response"] },
+          {
+            "from": "package",
+            "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
+            "package": "@types/node"
+          },
+          { "from": "package", "name": ["Context", "HTTPResponseError", "Next"], "package": "hono" }
+        ],
+        "treatMethodsAsReadonly": true
+      }
+    ],
+    "typescript/strict-boolean-expressions": [
+      "error",
+      { "allowNullableObject": false, "allowNumber": false, "allowString": false }
+    ],
+    "typescript/switch-exhaustiveness-check": ["error", { "requireDefaultForNonUnion": true }],
+    "typescript/use-unknown-in-catch-callback-variable": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/no-array-sort": [
+      "error",
+      { "allowAfterSpread": true, "allowExpressionStatement": false }
+    ],
+    "unicorn/no-useless-error-capture-stack-trace": "error",
+    "unicorn/prefer-node-protocol": "error"
+  },
+  "ignorePatterns": [".turbo/**", "coverage/**", "dist/**", "node_modules/**", "*.tsbuildinfo"],
+  "overrides": [{ "files": ["**/*.{js,mjs,cjs}"], "rules": { "eslint/no-undef": "error" } }]
 }
