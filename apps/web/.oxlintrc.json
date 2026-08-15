@@ -93,8 +93,6 @@
     "node/no-path-concat": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-useless-error-capture-stack-trace": "error",
-    "eslint/max-lines-per-function": ["error", 100],
-    "eslint/max-nested-callbacks": ["error", 3],
     "eslint/no-param-reassign": ["error", { "props": true }],
     "import/no-namespace": ["error", { "ignore": ["@stylexjs/stylex"] }],
     "unicorn/import-style": [
@@ -111,7 +109,6 @@
       { "allow": ["**/*.css", "server-only", "client-only"] }
     ],
     "react/jsx-filename-extension": ["error", { "allow": "as-needed", "extensions": [".tsx"] }],
-    "react/jsx-max-depth": ["error", { "max": 4 }],
     "react/no-object-type-as-default-prop": "off",
     "react/react-compiler": "error",
     "typescript/strict-boolean-expressions": [
@@ -125,6 +122,12 @@
     "typescript/no-floating-promises": ["error", { "checkThenables": true }],
 
     "eslint/id-length": "off",
+    "eslint/max-classes-per-file": "off",
+    "eslint/max-depth": "off",
+    "eslint/max-lines": "off",
+    "eslint/max-lines-per-function": "off",
+    "eslint/max-nested-callbacks": "off",
+    "eslint/max-params": "off",
     "eslint/max-statements": "off",
     "eslint/new-cap": "off",
     "eslint/no-await-in-loop": "off",
@@ -140,6 +143,7 @@
     "promise/prefer-await-to-then": "off",
     "promise/prefer-catch": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",

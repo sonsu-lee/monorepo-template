@@ -82,8 +82,8 @@ const compareProfileFlowViews = (
   previous.profileId === next.profileId &&
   previous.status === next.status;
 
-const createSaveProfileActor = ({ api, queryClient }: CreateProfileFlowOptions) =>
-  fromPromise<Profile, SaveProfileActorInput>(async ({ input, signal }) => {
+const createProfileFlow = ({ api, queryClient }: CreateProfileFlowOptions) => {
+  const saveProfile = fromPromise<Profile, SaveProfileActorInput>(async ({ input, signal }) => {
     const profile = await api.saveProfile({ ...input, signal });
 
     if (signal.aborted) {
@@ -103,10 +103,9 @@ const createSaveProfileActor = ({ api, queryClient }: CreateProfileFlowOptions) 
     return profile;
   });
 
-const createProfileLogic = (options: CreateProfileFlowOptions) =>
-  setup({
+  const logic = setup({
     actors: {
-      saveProfile: createSaveProfileActor(options),
+      saveProfile,
     },
     actions: {
       syncProfile: assign({
@@ -201,9 +200,6 @@ const createProfileLogic = (options: CreateProfileFlowOptions) =>
       },
     },
   });
-
-const createProfileFlow = (options: CreateProfileFlowOptions) => {
-  const logic = createProfileLogic(options);
 
   return defineMachineFlow({
     compare: compareProfileFlowViews,

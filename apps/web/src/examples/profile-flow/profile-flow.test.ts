@@ -48,7 +48,7 @@ const createProfileFlowHarness = (api: ProfileApi, profile: Profile = initialPro
   };
 };
 
-describe('saving', () => {
+describe('profile flow', () => {
   test('keeps editing when a blank draft is submitted', () => {
     let saveAttempts = 0;
     const api = createProfileApi(({ draftName, profileId }) => {
@@ -117,9 +117,7 @@ describe('saving', () => {
       harness.stop();
     }
   });
-});
 
-describe('retrying', () => {
   test('retries a failed save and stores the successful result', async () => {
     const savedProfile: Profile = {
       id: initialProfile.id,
@@ -158,9 +156,7 @@ describe('retrying', () => {
       harness.stop();
     }
   });
-});
 
-describe('synchronizing profiles', () => {
   test('preserves a local draft when the same profile is opened again', () => {
     const api = createProfileApi(({ draftName, profileId }) =>
       Promise.resolve({ id: profileId, name: draftName }),
