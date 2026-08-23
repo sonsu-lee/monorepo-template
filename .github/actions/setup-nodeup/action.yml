@@ -13,4 +13,5 @@ runs:
       shell: bash
       run: |
         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-        ./scripts/setup-nodeup.sh
+        nodeup override set "$(<.node-version)"
+        nodeup shim setup

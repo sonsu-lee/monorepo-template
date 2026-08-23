@@ -30,7 +30,8 @@ Install Nodeup and add its shim directory to `PATH`, then run the repository
 setup once for each clone or worktree:
 
 ```bash
-./scripts/setup-nodeup.sh
+nodeup override set "$(<.node-version)"
+nodeup shim setup
 pnpm install
 pnpm dev
 ```

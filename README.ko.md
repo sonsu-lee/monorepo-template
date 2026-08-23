@@ -30,7 +30,8 @@ Nodeup을 설치하고 shim 경로를 `PATH`에 추가한 뒤, clone 또는 work
 저장소 설정을 한 번 실행합니다.
 
 ```bash
-./scripts/setup-nodeup.sh
+nodeup override set "$(<.node-version)"
+nodeup shim setup
 pnpm install
 pnpm dev
 ```
