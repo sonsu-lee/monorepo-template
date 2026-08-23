@@ -9,9 +9,11 @@ runs:
       with:
         tool: nodeup@0.2.0
 
-    - name: Configure repository toolchain
+    - run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       shell: bash
-      run: >-
-        echo "$HOME/.local/bin" >> "$GITHUB_PATH" &&
-        nodeup override set "$(<.node-version)" &&
-        nodeup shim setup
+
+    - run: nodeup override set "$(<.node-version)"
+      shell: bash
+
+    - run: nodeup shim setup
+      shell: bash
