@@ -11,8 +11,6 @@ runs:
 
     - name: Configure repository toolchain
       shell: bash
-      env:
-        NODEUP_SHIM_DIR: ${{ runner.temp }}/nodeup-shims
       run: |
-        echo "$NODEUP_SHIM_DIR" >> "$GITHUB_PATH"
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
         ./scripts/setup-nodeup.sh
