@@ -18,17 +18,25 @@ API, managed with pnpm workspaces and Turborepo.
 
 ## Requirements
 
-- Node.js 24 LTS (`24.18.1` or newer within the 24.x line)
-- pnpm `11.18.0`
+- [Nodeup](https://nodeup.delino.io/installation), installed globally
+- Node.js, pinned in `.node-version`
+- pnpm, pinned in `package.json`
 - Docker Desktop or Docker Engine with Docker Compose v2 (required only for
   local object storage)
 
 ## Getting started
 
+Install Nodeup and add its shim directory to `PATH`, then run the repository
+setup once for each clone or worktree:
+
 ```bash
+./scripts/setup-nodeup.sh
 pnpm install
 pnpm dev
 ```
+
+Nodeup stores directory overrides by absolute path, so each clone or worktree
+needs its own setup run.
 
 Garage is optional and runs separately from the applications. Start it first
 when working with object storage:

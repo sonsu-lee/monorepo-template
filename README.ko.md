@@ -18,17 +18,25 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 
 ## 요구사항
 
-- Node.js 24 LTS (`24.18.1` 이상인 24.x 버전)
-- pnpm `11.18.0`
+- 전역으로 설치한 [Nodeup](https://nodeup.delino.io/installation)
+- `.node-version`에 고정된 Node.js
+- `package.json`에 고정된 pnpm
 - Docker Desktop 또는 Docker Compose v2를 지원하는 Docker Engine
   (로컬 오브젝트 스토리지를 사용할 때만 필요)
 
 ## 시작하기
 
+Nodeup을 설치하고 shim 경로를 `PATH`에 추가한 뒤, clone 또는 worktree마다
+저장소 설정을 한 번 실행합니다.
+
 ```bash
+./scripts/setup-nodeup.sh
 pnpm install
 pnpm dev
 ```
+
+Nodeup은 절대 경로를 기준으로 directory override를 저장하므로, clone이나
+worktree를 새로 만들면 설정을 다시 실행해야 합니다.
 
 Garage는 선택 사항이며 애플리케이션과 별도로 실행됩니다. 오브젝트
 스토리지를 사용하는 작업에서는 먼저 Garage를 시작합니다.
