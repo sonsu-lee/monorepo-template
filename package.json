@@ -2,7 +2,7 @@
   "name": "monorepo-template",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": "^24.18.1"
   },
@@ -27,6 +27,6 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
-    "turbo": "2.10.5"
+    "turbo": "2.10.12"
   }
 }
