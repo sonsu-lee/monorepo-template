@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md)
 
-An opinionated TypeScript monorepo template with a Next.js frontend and a Hono
+An opinionated TypeScript monorepo template with a Next.js frontend and a NestJS
 API, managed with pnpm workspaces and Turborepo.
 
 ## Included
@@ -10,10 +10,10 @@ API, managed with pnpm workspaces and Turborepo.
 | Area            | Path         | Stack                                          |
 | --------------- | ------------ | ---------------------------------------------- |
 | Web             | `apps/web`   | Next.js, React, StyleX, TanStack Query, XState |
-| API             | `apps/api`   | Hono, Node.js                                  |
+| API             | `apps/api`   | NestJS, Express, Node.js                       |
 | Tooling         | `apps/*`     | TypeScript, oxfmt, oxlint per application      |
 | Orchestration   | Workspace    | pnpm workspaces, Turborepo                     |
-| Tests           | `apps/web`   | Vitest, Playwright                             |
+| Tests           | `apps/*`     | Vitest, Playwright                             |
 | Shared packages | `packages/*` | Reserved for code shared across applications   |
 
 ## Requirements
@@ -53,6 +53,10 @@ pnpm --filter @repo/web dev
 pnpm --filter api dev
 ```
 
+The web application uses port `3000`. The NestJS API listens on
+`0.0.0.0:3001` by default, and `GET http://localhost:3001/` returns
+`Hello World!`.
+
 ## Commands
 
 | Command               | Purpose                              |
@@ -66,7 +70,7 @@ pnpm --filter api dev
 | `pnpm test`           | Run tests once                       |
 | `pnpm test:watch`     | Run tests in watch mode              |
 | `pnpm test:coverage`  | Generate coverage reports            |
-| `pnpm test:e2e`       | Run Playwright tests headlessly      |
+| `pnpm test:e2e`       | Run all end-to-end tests             |
 | `pnpm test:e2e:ui`    | Open Playwright UI                   |
 | `pnpm storage:up`     | Start Garage and wait until healthy  |
 | `pnpm storage:down`   | Stop Garage and preserve stored data |
@@ -137,7 +141,7 @@ by the template.
 | Area              | Service                  | Use                                              |
 | ----------------- | ------------------------ | ------------------------------------------------ |
 | Frontend          | Cloudflare Workers       | Deploy the Next.js application through OpenNext  |
-| Backend           | Railway                  | Run the Hono API as a persistent Node.js service |
+| Backend           | Railway                  | Run the NestJS API as a persistent Node.js service |
 | Database          | Railway PostgreSQL       | Store transactional application data             |
 | Object storage    | Cloudflare R2            | Store uploaded files and other objects           |
 | Error monitoring  | Sentry                   | Collect frontend and backend errors              |
