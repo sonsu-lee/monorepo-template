@@ -83,6 +83,7 @@
     "typescript/no-invalid-void-type": "error",
     "typescript/no-non-null-assertion": "error",
     "typescript/no-require-imports": "error",
+    "typescript/no-extraneous-class": ["error", { "allowWithDecorator": true }],
     "typescript/prefer-readonly-parameter-types": [
       "error",
       {
@@ -92,8 +93,7 @@
             "from": "package",
             "name": ["AddressInfo", "Buffer", "ErrnoException", "ProcessEnv"],
             "package": "@types/node"
-          },
-          { "from": "package", "name": ["Context", "HTTPResponseError", "Next"], "package": "hono" }
+          }
         ],
         "treatMethodsAsReadonly": true
       }

@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md)
 
-Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
+Next.js 프론트엔드와 NestJS API로 구성한 TypeScript 모노레포
 템플릿입니다. pnpm workspace와 Turborepo로 관리합니다.
 
 ## 구성
@@ -10,10 +10,10 @@ Next.js 프론트엔드와 Hono API로 구성한 TypeScript 모노레포
 | 영역        | 경로         | 기술                                           |
 | ----------- | ------------ | ---------------------------------------------- |
 | 웹          | `apps/web`   | Next.js, React, StyleX, TanStack Query, XState |
-| API         | `apps/api`   | Hono, Node.js                                  |
+| API         | `apps/api`   | NestJS, Express, Node.js                       |
 | 도구        | `apps/*`     | 애플리케이션별 TypeScript, oxfmt, oxlint       |
 | 실행 관리   | workspace    | pnpm workspace, Turborepo                      |
-| 테스트      | `apps/web`   | Vitest, Playwright                             |
+| 테스트      | `apps/*`     | Vitest, Playwright                             |
 | 공통 패키지 | `packages/*` | 애플리케이션에서 공유할 코드를 위한 경로       |
 
 ## 요구사항
@@ -53,6 +53,10 @@ pnpm --filter @repo/web dev
 pnpm --filter api dev
 ```
 
+웹 애플리케이션은 `3000` 포트를 사용합니다. NestJS API는 기본적으로
+`0.0.0.0:3001`에서 수신하며, `GET http://localhost:3001/`은
+`Hello World!`를 반환합니다.
+
 ## 명령어
 
 | 명령어                | 용도                                     |
@@ -66,7 +70,7 @@ pnpm --filter api dev
 | `pnpm test`           | 테스트 한 번 실행                        |
 | `pnpm test:watch`     | 테스트 watch 모드 실행                   |
 | `pnpm test:coverage`  | 커버리지 보고서 생성                     |
-| `pnpm test:e2e`       | Playwright 테스트를 headless 모드로 실행 |
+| `pnpm test:e2e`       | 모든 end-to-end 테스트 실행              |
 | `pnpm test:e2e:ui`    | Playwright UI 실행                       |
 | `pnpm storage:up`     | Garage를 시작하고 healthy 상태까지 대기  |
 | `pnpm storage:down`   | 저장된 데이터를 보존하고 Garage 중지     |
@@ -137,7 +141,7 @@ Garage를 시작하면 개발 키와 `local-dev` 버킷이 다시 생성됩니�
 | 영역              | 서비스              | 용도                                           |
 | ----------------- | ------------------- | ---------------------------------------------- |
 | 프론트엔드        | Cloudflare Workers  | OpenNext를 통한 Next.js 애플리케이션 배포      |
-| 백엔드            | Railway             | Hono API를 지속 실행되는 Node.js 서비스로 운영 |
+| 백엔드            | Railway             | NestJS API를 지속 실행되는 Node.js 서비스로 운영 |
 | 데이터베이스      | Railway PostgreSQL  | 트랜잭션 애플리케이션 데이터 저장              |
 | 오브젝트 스토리지 | Cloudflare R2       | 업로드 파일과 오브젝트 저장                    |
 | 오류 모니터링     | Sentry              | 프론트엔드와 백엔드 오류 수집                  |
