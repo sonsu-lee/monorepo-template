@@ -39,8 +39,8 @@ pnpm dev
 Nodeup은 절대 경로를 기준으로 directory override를 저장하므로, clone이나
 worktree를 새로 만들면 설정을 다시 실행해야 합니다.
 
-Garage는 선택 사항이며 애플리케이션과 별도로 실행됩니다. 오브젝트
-스토리지를 사용하는 작업에서는 먼저 Garage를 시작합니다.
+RustFS는 선택 사항이며 애플리케이션과 별도로 실행됩니다. 오브젝트
+스토리지를 사용하는 작업에서는 먼저 RustFS를 시작합니다.
 
 ```bash
 pnpm storage:up
@@ -72,10 +72,10 @@ pnpm --filter api dev
 | `pnpm test:coverage`  | 커버리지 보고서 생성                     |
 | `pnpm test:e2e`       | 모든 end-to-end 테스트 실행              |
 | `pnpm test:e2e:ui`    | Playwright UI 실행                       |
-| `pnpm storage:up`     | Garage를 시작하고 healthy 상태까지 대기  |
-| `pnpm storage:down`   | 저장된 데이터를 보존하고 Garage 중지     |
-| `pnpm storage:logs`   | Garage 로그 추적                         |
-| `pnpm storage:status` | Garage 노드와 layout 상태 확인           |
+| `pnpm storage:up`     | RustFS를 시작하고 버킷 초기화             |
+| `pnpm storage:down`   | 저장된 데이터를 보존하고 RustFS 중지      |
+| `pnpm storage:logs`   | RustFS 로그 추적                          |
+| `pnpm storage:status` | RustFS 상태 확인                          |
 | `pnpm storage:reset`  | 모든 로컬 오브젝트 스토리지 데이터 삭제  |
 
 브라우저 테스트를 실행하기 전에 Chromium을 한 번 설치합니다.
@@ -86,11 +86,11 @@ pnpm --filter @repo/web exec playwright install chromium
 
 ## 로컬 오브젝트 스토리지
 
-[Garage](https://garagehq.deuxfleurs.fr/)는 로컬 개발을 위한 S3 호환
+[RustFS](https://rustfs.com/)는 로컬 개발을 위한 S3 호환
 오브젝트 스토리지를 제공합니다. Docker가 실행 중이어야 하며 `pnpm dev`는
-Garage를 자동으로 시작하지 않습니다.
+RustFS를 자동으로 시작하지 않습니다.
 
-Garage를 시작하고 노드 상태를 확인합니다.
+RustFS를 시작하고 상태를 확인합니다.
 
 ```bash
 pnpm storage:up
@@ -101,30 +101,32 @@ pnpm storage:status
 
 | 변수                               | 로컬 기본값                                                        |
 | ---------------------------------- | ------------------------------------------------------------------ |
-| `OBJECT_STORAGE_ENDPOINT`          | `http://127.0.0.1:3900`                                            |
-| `OBJECT_STORAGE_REGION`            | `garage`                                                           |
+| `OBJECT_STORAGE_ENDPOINT`          | `http://127.0.0.1:9000`                                            |
+| `OBJECT_STORAGE_REGION`            | `us-east-1`                                                        |
 | `OBJECT_STORAGE_BUCKET`            | `local-dev`                                                        |
-| `OBJECT_STORAGE_ACCESS_KEY_ID`     | `GK0123456789abcdef0123456789abcdef`                               |
-| `OBJECT_STORAGE_SECRET_ACCESS_KEY` | `0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef` |
+| `OBJECT_STORAGE_ACCESS_KEY_ID`     | `local-dev-access-key`                                             |
+| `OBJECT_STORAGE_SECRET_ACCESS_KEY` | `local-dev-secret-key`                                             |
 | `OBJECT_STORAGE_FORCE_PATH_STYLE`  | `true`                                                             |
 
-S3 endpoint는 `http://127.0.0.1:3900`, health endpoint는
-`http://127.0.0.1:3903/health`입니다. 고정 자격 증명은 의도적으로 로컬
+S3 endpoint는 `http://127.0.0.1:9000`, Console은
+`http://127.0.0.1:9001`, health endpoint는
+`http://127.0.0.1:9000/health`입니다. 고정 자격 증명은 의도적으로 로컬
 개발에서만 사용합니다. 서버 전용 설정으로 유지하고 `NEXT_PUBLIC_*`
 변수로 노출하지 않습니다.
 
-`pnpm storage:down`은 Garage 컨테이너와 네트워크를 제거하지만 named
+`pnpm storage:down`은 RustFS 컨테이너와 네트워크를 제거하지만 named
 volume은 보존합니다. `pnpm storage:reset`은 해당 volume을 삭제하므로
-모든 로컬 오브젝트와 Garage 메타데이터가 영구적으로 제거됩니다. 다음에
-Garage를 시작하면 개발 키와 `local-dev` 버킷이 다시 생성됩니다.
+모든 로컬 오브젝트와 RustFS 메타데이터가 영구적으로 제거됩니다. 다음에
+RustFS를 시작하면 `local-dev` 버킷이 다시 생성됩니다.
 
-`.env`에서 초기 버킷이나 자격 증명을 변경해도 기존 Garage 메타데이터는
-갱신되지 않습니다. 변경값을 적용하려면 `pnpm storage:reset`을
-실행합니다.
+`pnpm storage:up`은 RustFS가 healthy 상태가 된 뒤 멱등적인 버킷 초기화
+작업을 실행합니다. 기존 volume을 다시 시작해도 버킷과 오브젝트를
+교체하지 않습니다. 다른 로컬 오브젝트 스토리지 구현의 데이터는 RustFS
+volume으로 자동 마이그레이션되지 않습니다.
 
-이 단일 노드 구성은 replication factor가 1이며 중복성과 백업을
-제공하지 않습니다. 폐기 가능한 로컬 개발 데이터에만 사용합니다. 이
-구성은 AWS S3 또는 Cloudflare R2를 설정하지 않습니다.
+이 단일 노드·단일 디스크 구성은 중복성과 백업을 제공하지 않습니다. 폐기
+가능한 로컬 개발 데이터에만 사용합니다. 이 구성은 AWS S3 또는
+Cloudflare R2를 설정하지 않습니다.
 
 ## 규칙
 
@@ -134,7 +136,7 @@ Garage를 시작하면 개발 키와 `local-dev` 버킷이 다시 생성됩니�
 
 ## 권장 배포 구성
 
-앞에서 설명한 Garage 서비스는 로컬 개발 전용입니다. 이 템플릿으로 만든
+앞에서 설명한 RustFS 서비스는 로컬 개발 전용입니다. 이 템플릿으로 만든
 프로젝트는 보통 다음 프로덕션 서비스를 사용합니다. 아래 서비스는 권장
 사항이며 템플릿에 미리 설정되어 있지 않습니다.
 

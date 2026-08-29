@@ -39,7 +39,7 @@ pnpm dev
 Nodeup stores directory overrides by absolute path, so each clone or worktree
 needs its own setup run.
 
-Garage is optional and runs separately from the applications. Start it first
+RustFS is optional and runs separately from the applications. Start it first
 when working with object storage:
 
 ```bash
@@ -72,10 +72,10 @@ The web application uses port `3000`. The NestJS API listens on
 | `pnpm test:coverage`  | Generate coverage reports            |
 | `pnpm test:e2e`       | Run all end-to-end tests             |
 | `pnpm test:e2e:ui`    | Open Playwright UI                   |
-| `pnpm storage:up`     | Start Garage and wait until healthy  |
-| `pnpm storage:down`   | Stop Garage and preserve stored data |
-| `pnpm storage:logs`   | Follow Garage logs                   |
-| `pnpm storage:status` | Show Garage node and layout status   |
+| `pnpm storage:up`     | Start RustFS and initialize the bucket |
+| `pnpm storage:down`   | Stop RustFS and preserve stored data   |
+| `pnpm storage:logs`   | Follow RustFS logs                     |
+| `pnpm storage:status` | Check RustFS health                    |
 | `pnpm storage:reset`  | Delete all local object storage data |
 
 Install Chromium once before running the browser tests:
@@ -86,11 +86,11 @@ pnpm --filter @repo/web exec playwright install chromium
 
 ## Local object storage
 
-[Garage](https://garagehq.deuxfleurs.fr/) provides S3-compatible object storage
+[RustFS](https://rustfs.com/) provides S3-compatible object storage
 for local development. Docker must be running, and `pnpm dev` does not start
-Garage automatically.
+RustFS automatically.
 
-Start Garage and inspect its node status:
+Start RustFS and inspect its health:
 
 ```bash
 pnpm storage:up
@@ -101,29 +101,32 @@ The local connection defaults are documented in `.env.example`:
 
 | Variable                           | Local default                                                      |
 | ---------------------------------- | ------------------------------------------------------------------ |
-| `OBJECT_STORAGE_ENDPOINT`          | `http://127.0.0.1:3900`                                            |
-| `OBJECT_STORAGE_REGION`            | `garage`                                                           |
+| `OBJECT_STORAGE_ENDPOINT`          | `http://127.0.0.1:9000`                                            |
+| `OBJECT_STORAGE_REGION`            | `us-east-1`                                                        |
 | `OBJECT_STORAGE_BUCKET`            | `local-dev`                                                        |
-| `OBJECT_STORAGE_ACCESS_KEY_ID`     | `GK0123456789abcdef0123456789abcdef`                               |
-| `OBJECT_STORAGE_SECRET_ACCESS_KEY` | `0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef` |
+| `OBJECT_STORAGE_ACCESS_KEY_ID`     | `local-dev-access-key`                                             |
+| `OBJECT_STORAGE_SECRET_ACCESS_KEY` | `local-dev-secret-key`                                             |
 | `OBJECT_STORAGE_FORCE_PATH_STYLE`  | `true`                                                             |
 
-The S3 endpoint is `http://127.0.0.1:3900`, and the health endpoint is
-`http://127.0.0.1:3903/health`. The fixed credentials are intentionally limited
+The S3 endpoint is `http://127.0.0.1:9000`, the Console is available at
+`http://127.0.0.1:9001`, and the health endpoint is
+`http://127.0.0.1:9000/health`. The fixed credentials are intentionally limited
 to local development. Keep them in server-only configuration and never expose
 them through a `NEXT_PUBLIC_*` variable.
 
-`pnpm storage:down` removes the Garage containers and network but preserves the
-named volumes. `pnpm storage:reset` deletes those volumes, permanently removing
-all local objects and Garage metadata. The development key and `local-dev`
-bucket are recreated the next time Garage starts.
+`pnpm storage:down` removes the RustFS containers and network but preserves the
+named volume. `pnpm storage:reset` deletes that volume, permanently removing all
+local objects and RustFS metadata. The `local-dev` bucket is recreated the next
+time RustFS starts.
 
-Changing the initial bucket or credentials in `.env` does not update existing
-Garage metadata. Run `pnpm storage:reset` to apply those changes.
+`pnpm storage:up` runs an idempotent bucket initializer after RustFS becomes
+healthy. Starting an existing volume does not replace the bucket or its objects.
+Data from another local object storage implementation is not migrated into the
+RustFS volume automatically.
 
-This single-node setup uses a replication factor of one and provides no
-redundancy or backup. Use it only for disposable local development data. It
-does not configure AWS S3 or Cloudflare R2.
+This single-node, single-disk setup provides no redundancy or backup. Use it
+only for disposable local development data. It does not configure AWS S3 or
+Cloudflare R2.
 
 ## Conventions
 
@@ -133,7 +136,7 @@ does not configure AWS S3 or Cloudflare R2.
 
 ## Recommended deployment
 
-The Garage service described above is for local development only. A typical
+The RustFS service described above is for local development only. A typical
 production deployment for a project created from this template uses the
 following services. The providers are recommendations and are not preconfigured
 by the template.
