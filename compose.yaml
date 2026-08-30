@@ -1,26 +1,46 @@
 services:
-  garage:
-    image: dxflrs/garage:v2.3.0
-    command: [/garage, server, --single-node, --default-bucket]
+  rustfs:
+    image: rustfs/rustfs:1.0.0-rc.4@sha256:a9fbb5e5bfce09ccd0869ac9a7b0e39191c6868d75ec4c5d08ebbd5475db5d6b
+    security_opt:
+      - no-new-privileges:true
     environment:
-      GARAGE_DEFAULT_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY_ID:-GK0123456789abcdef0123456789abcdef}
-      GARAGE_DEFAULT_SECRET_KEY: ${OBJECT_STORAGE_SECRET_ACCESS_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
-      GARAGE_DEFAULT_BUCKET: ${OBJECT_STORAGE_BUCKET:-local-dev}
+      RUSTFS_VOLUMES: /data
+      RUSTFS_ADDRESS: 0.0.0.0:9000
+      RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY_ID:-local-dev-access-key}
+      RUSTFS_SECRET_KEY: ${OBJECT_STORAGE_SECRET_ACCESS_KEY:-local-dev-secret-key}
+      RUSTFS_REGION: ${OBJECT_STORAGE_REGION:-us-east-1}
     ports:
-      - 127.0.0.1:3900:3900
-      - 127.0.0.1:3903:3903
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
     volumes:
-      - ./garage.toml:/etc/garage.toml:ro
-      - garage-meta:/var/lib/garage/meta
-      - garage-data:/var/lib/garage/data
+      - rustfs-data:/data
     healthcheck:
-      test: [CMD, /garage, status]
+      test: [CMD, curl, -fsS, http://127.0.0.1:9000/health]
       interval: 2s
       timeout: 2s
       retries: 30
-      start_period: 2s
+      start_period: 5s
     restart: unless-stopped
 
+  rustfs-init:
+    image: rustfs/rc@sha256:f3dc331f76b14a852a1dc0bffc80509cc41424eaa9ea0306d9584edc211dcad6
+    depends_on:
+      rustfs:
+        condition: service_healthy
+    environment:
+      RUSTFS_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY_ID:-local-dev-access-key}
+      RUSTFS_SECRET_KEY: ${OBJECT_STORAGE_SECRET_ACCESS_KEY:-local-dev-secret-key}
+      RUSTFS_REGION: ${OBJECT_STORAGE_REGION:-us-east-1}
+      RUSTFS_BUCKET: ${OBJECT_STORAGE_BUCKET:-local-dev}
+    entrypoint:
+      - /bin/sh
+      - -ec
+      - |
+        /usr/bin/rc alias set local http://rustfs:9000 "$${RUSTFS_ACCESS_KEY}" "$${RUSTFS_SECRET_KEY}" --region "$${RUSTFS_REGION}" --bucket-lookup path
+        /usr/bin/rc bucket create "local/$${RUSTFS_BUCKET}" --ignore-existing
+    restart: "no"
+
 volumes:
-  garage-meta:
-  garage-data:
+  rustfs-data:
